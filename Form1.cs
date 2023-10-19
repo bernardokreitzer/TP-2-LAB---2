@@ -20,8 +20,12 @@ namespace TP_2_LAB___2
         {
             InitializeComponent();
         }
+
+        Sistema miSistema;
         Propiedad nuevoAlojamiento;
-        
+        double precioBase;
+
+
 
         protected ArrayList alojamientos = new ArrayList();
 
@@ -34,9 +38,10 @@ namespace TP_2_LAB___2
                 string direccion = vCargaAlojamiento.tbDireccion.Text;
                 int numeroPropiedad = Convert.ToInt32(vCargaAlojamiento.tbNroPropiedad.Text);
 
-                alojamientos.Add(new Propiedad(direccion, numeroPropiedad));
+                miSistema.AgregarPropiedades(new Propiedad(direccion, numeroPropiedad));
+                 //   alojamientos.Add();
                 lBoxAlojamientos.Items.Clear();
-                foreach (Propiedad p in alojamientos)
+                foreach (Propiedad p in miSistema.ListarPropiedades())
                 {
                     lBoxAlojamientos.Items.Add(p.Direccion + " " + p.Numero);
                 }
@@ -50,18 +55,18 @@ namespace TP_2_LAB___2
             // Proceso De Serializar
 
             // 1. Crear Stream
-            FileStream miStream = new FileStream("C:/Users/alexx/Documents/alojamientos.dat", FileMode.Open, FileAccess.Read, FileShare.None);
+           // FileStream miStream = new FileStream("C:/Users/alexx/Documents/alojamientos.dat", FileMode.Open, FileAccess.Read, FileShare.None);
 
             // 2.- Crear Formateador
-            BinaryFormatter formateador = new BinaryFormatter();
+           // BinaryFormatter formateador = new BinaryFormatter();
 
             // 3.- DeSerialiar
-            nuevoAlojamiento = (Propiedad)formateador.Deserialize(miStream);
+            //nuevoAlojamiento = (Propiedad)formateador.Deserialize(miStream);
             //alojamientos[0] = nuevoAlojamiento;
 
 
             // 4.- Cerrar Stream
-            miStream.Close();
+            //miStream.Close();
         }
 
         private void Serializar()
@@ -84,16 +89,37 @@ namespace TP_2_LAB___2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
 
-           // alojamientos.Add(new Propiedad("Colon 236", 20));
+            //VENTANA INICIAL
+            FPrecioBase vPrecioBase = new FPrecioBase();
 
-          //  alojamientos.Add(new Propiedad("San Juan 555", 30));
-       
+            if (vPrecioBase.ShowDialog() == DialogResult.OK)
+            {
+                 precioBase = Convert.ToDouble(vPrecioBase.tbPrecioBase.Text);
+                miSistema = new Sistema(precioBase);
+                MessageBox.Show($"Precio base: {precioBase} ingresado correctamente");
 
-            Deserializar();
+            }
+
+            else
+            {
+                MessageBox.Show("Cancelado por usuario");
+            }
+
+            
+
+            miSistema.AgregarPropiedades(new Propiedad("Colon 236", 20));
+            miSistema.AgregarPropiedades(new Propiedad("San Juan 555", 30));
+
+
+            //  alojamientos.Add(new Propiedad("San Juan 555", 30));
+
+
+            //  Deserializar();
 
             lBoxAlojamientos.Items.Clear();
-            foreach(Propiedad p in alojamientos)
+            foreach(Propiedad p in miSistema.ListarPropiedades())
             {
                 lBoxAlojamientos.Items.Add(p.Direccion + " " + p.Numero);
             }
@@ -106,8 +132,11 @@ namespace TP_2_LAB___2
 
             //fModificarAlojamiento.tbDireccion.Text = "hola";
 
-            fModificarAlojamiento.tbDireccion.Text = ((Propiedad)alojamientos[itemSeleccionado]).Direccion;
-            fModificarAlojamiento.tbNroPropiedad.Text = ((Propiedad)alojamientos[itemSeleccionado]).Numero.ToString();
+            //fModificarAlojamiento.tbDireccion.Text = ((Propiedad)alojamientos[itemSeleccionado]).Direccion;
+            //fModificarAlojamiento.tbNroPropiedad.Text = ((Propiedad)alojamientos[itemSeleccionado]).Numero.ToString();
+
+            fModificarAlojamiento.tbDireccion.Text = miSistema.BuscarPropiedad(itemSeleccionado).Direccion;
+            fModificarAlojamiento.tbNroPropiedad.Text = miSistema.BuscarPropiedad(itemSeleccionado).Numero.ToString();
 
             int numeroPropiedad = Convert.ToInt32(fModificarAlojamiento.tbNroPropiedad.Text);
 
@@ -116,12 +145,18 @@ namespace TP_2_LAB___2
                 string direccion = fModificarAlojamiento.tbDireccion.Text;
                 numeroPropiedad = Convert.ToInt32(fModificarAlojamiento.tbNroPropiedad.Text);
 
+
+
                 ((Propiedad)alojamientos[itemSeleccionado]).Direccion = direccion;
                 ((Propiedad)alojamientos[itemSeleccionado]).Numero = numeroPropiedad;
 
+                miSistema.ModificarPropiedad(itemSeleccionado, direccion, numeroPropiedad);
+
+                
+
                 //alojamientos.Add(new Propiedad(direccion, numeroPropiedad));
-                lBoxAlojamientos.Items.Clear();
-                foreach (Propiedad p in alojamientos)
+                this.lBoxAlojamientos.Items.Clear();
+                foreach (Propiedad p in miSistema.ListarPropiedades())
                 {
                     lBoxAlojamientos.Items.Add(p.Direccion + " " + p.Numero);
                 }

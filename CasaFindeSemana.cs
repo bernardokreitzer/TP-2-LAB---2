@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TP_2_LAB___2
 {
+    [Serializable]
     class CasaFindeSemana : CasaPorDia
     {
         public CasaFindeSemana(string nombre, int numero) : base(nombre, numero)

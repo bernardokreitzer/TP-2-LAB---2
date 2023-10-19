@@ -63,7 +63,7 @@ namespace TP_2_LAB___2
             this.panel1.Controls.Add(this.labAlojamiento);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(448, 520);
+            this.panel1.Size = new System.Drawing.Size(448, 323);
             this.panel1.TabIndex = 0;
             // 
             // button1
@@ -104,7 +104,7 @@ namespace TP_2_LAB___2
             this.lBoxAlojamientos.ItemHeight = 16;
             this.lBoxAlojamientos.Location = new System.Drawing.Point(139, 53);
             this.lBoxAlojamientos.Name = "lBoxAlojamientos";
-            this.lBoxAlojamientos.Size = new System.Drawing.Size(296, 420);
+            this.lBoxAlojamientos.Size = new System.Drawing.Size(296, 228);
             this.lBoxAlojamientos.TabIndex = 1;
             // 
             // labAlojamiento
@@ -126,9 +126,9 @@ namespace TP_2_LAB___2
             this.panel2.Controls.Add(this.button4);
             this.panel2.Controls.Add(this.listBox1);
             this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(469, 0);
+            this.panel2.Location = new System.Drawing.Point(463, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(448, 520);
+            this.panel2.Size = new System.Drawing.Size(390, 323);
             this.panel2.TabIndex = 1;
             // 
             // button2
@@ -167,7 +167,7 @@ namespace TP_2_LAB___2
             this.listBox1.ItemHeight = 16;
             this.listBox1.Location = new System.Drawing.Point(139, 53);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(296, 420);
+            this.listBox1.Size = new System.Drawing.Size(235, 228);
             this.listBox1.TabIndex = 1;
             // 
             // label1
@@ -189,9 +189,9 @@ namespace TP_2_LAB___2
             this.panel3.Controls.Add(this.button7);
             this.panel3.Controls.Add(this.listBox2);
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Location = new System.Drawing.Point(934, 0);
+            this.panel3.Location = new System.Drawing.Point(859, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(448, 520);
+            this.panel3.Size = new System.Drawing.Size(423, 323);
             this.panel3.TabIndex = 2;
             // 
             // button5
@@ -230,7 +230,7 @@ namespace TP_2_LAB___2
             this.listBox2.ItemHeight = 16;
             this.listBox2.Location = new System.Drawing.Point(139, 53);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(296, 420);
+            this.listBox2.Size = new System.Drawing.Size(262, 228);
             this.listBox2.TabIndex = 1;
             // 
             // label2
@@ -248,7 +248,7 @@ namespace TP_2_LAB___2
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1416, 532);
+            this.ClientSize = new System.Drawing.Size(1604, 532);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);

@@ -14,6 +14,7 @@ namespace TP_2_LAB___2
     {
         private string direccion;
         private int numeroPropiedad;
+        protected double precioBase;
 
         public Propiedad(string dir, int numero)
         {
