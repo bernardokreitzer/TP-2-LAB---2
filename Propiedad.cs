@@ -4,8 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+
 namespace TP_2_LAB___2
 {
+    [Serializable]
     class Propiedad
     {
         private string direccion;

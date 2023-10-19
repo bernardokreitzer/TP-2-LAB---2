@@ -9,6 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+
 namespace TP_2_LAB___2
 {
     public partial class Form1 : Form
@@ -17,8 +20,8 @@ namespace TP_2_LAB___2
         {
             InitializeComponent();
         }
-
         Propiedad nuevoAlojamiento;
+        
 
         protected ArrayList alojamientos = new ArrayList();
 
@@ -42,14 +45,52 @@ namespace TP_2_LAB___2
             vCargaAlojamiento.Dispose();
         }
 
+        private void Deserializar()
+        {
+            // Proceso De Serializar
+
+            // 1. Crear Stream
+            FileStream miStream = new FileStream("C:/Users/alexx/Documents/alojamientos.dat", FileMode.Open, FileAccess.Read, FileShare.None);
+
+            // 2.- Crear Formateador
+            BinaryFormatter formateador = new BinaryFormatter();
+
+            // 3.- DeSerialiar
+            nuevoAlojamiento = (Propiedad)formateador.Deserialize(miStream);
+            //alojamientos[0] = nuevoAlojamiento;
+
+
+            // 4.- Cerrar Stream
+            miStream.Close();
+        }
+
+        private void Serializar()
+        {
+            // Proceso Serializar
+
+            // 1. Crear Stream
+            FileStream miStream = new FileStream("C:/Users/alexx/Documents/alojamientos.dat", FileMode.Create, FileAccess.Write, FileShare.None);
+
+            // 2.- Crear Formateador
+            BinaryFormatter formateador = new BinaryFormatter();
+
+            // 3.- Serialiar
+            formateador.Serialize(miStream, alojamientos[0]);
+            formateador.Serialize(miStream, alojamientos[1]);
+
+            // 4.- Cerrar Stream
+            miStream.Close();
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            
-            alojamientos.Add(new Propiedad("Colon 236", 20));
 
-            alojamientos.Add(new Propiedad("San Juan 555", 30));
+           // alojamientos.Add(new Propiedad("Colon 236", 20));
 
+          //  alojamientos.Add(new Propiedad("San Juan 555", 30));
+       
 
+            Deserializar();
 
             lBoxAlojamientos.Items.Clear();
             foreach(Propiedad p in alojamientos)
