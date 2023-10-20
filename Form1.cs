@@ -37,13 +37,14 @@ namespace TP_2_LAB___2
             {
                 string direccion = vCargaAlojamiento.tbDireccion.Text;
                 int numeroPropiedad = Convert.ToInt32(vCargaAlojamiento.tbNroPropiedad.Text);
+                string tipoAlojamiento = vCargaAlojamiento.cbTipoAlojamiento.Text;
 
-                miSistema.AgregarPropiedades(new Propiedad(direccion, numeroPropiedad));
+                miSistema.AgregarPropiedades(new Propiedad(direccion, numeroPropiedad, tipoAlojamiento));
                  //   alojamientos.Add();
                 lBoxAlojamientos.Items.Clear();
                 foreach (Propiedad p in miSistema.ListarPropiedades())
                 {
-                    lBoxAlojamientos.Items.Add(p.Direccion + " " + p.Numero);
+                    lBoxAlojamientos.Items.Add(p.Direccion + " " + p.Numero + " " + p.TipoPropiedad );
                 }
 
             }
@@ -109,8 +110,11 @@ namespace TP_2_LAB___2
 
             
 
-            miSistema.AgregarPropiedades(new Propiedad("Colon 236", 20));
-            miSistema.AgregarPropiedades(new Propiedad("San Juan 555", 30));
+            miSistema.AgregarPropiedades(new Propiedad("Colon 236", 20, "Casa Por Dia"));
+            miSistema.AgregarPropiedades(new Propiedad("San Juan 555", 30, "Casa Por Dia"));
+
+
+            
 
 
             //  alojamientos.Add(new Propiedad("San Juan 555", 30));
@@ -121,7 +125,7 @@ namespace TP_2_LAB___2
             lBoxAlojamientos.Items.Clear();
             foreach(Propiedad p in miSistema.ListarPropiedades())
             {
-                lBoxAlojamientos.Items.Add(p.Direccion + " " + p.Numero);
+                lBoxAlojamientos.Items.Add(p.Direccion + " " + p.Numero + " " + p.TipoPropiedad);
             }
         }
 
@@ -147,8 +151,8 @@ namespace TP_2_LAB___2
 
 
 
-                ((Propiedad)alojamientos[itemSeleccionado]).Direccion = direccion;
-                ((Propiedad)alojamientos[itemSeleccionado]).Numero = numeroPropiedad;
+              //  ((Propiedad)alojamientos[itemSeleccionado]).Direccion = direccion;
+              //  ((Propiedad)alojamientos[itemSeleccionado]).Numero = numeroPropiedad;
 
                 miSistema.ModificarPropiedad(itemSeleccionado, direccion, numeroPropiedad);
 

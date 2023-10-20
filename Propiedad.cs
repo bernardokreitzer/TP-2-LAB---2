@@ -15,11 +15,13 @@ namespace TP_2_LAB___2
         private string direccion;
         private int numeroPropiedad;
         protected double precioBase;
+        protected string tipoPropiedad;
 
-        public Propiedad(string dir, int numero)
+        public Propiedad(string dir, int numero, string propiedad)
         {
             direccion = dir;
             numeroPropiedad = numero;
+            tipoPropiedad = propiedad;
         }
 
         public string Direccion
@@ -32,6 +34,13 @@ namespace TP_2_LAB___2
         { 
             get { return numeroPropiedad; }
             set { numeroPropiedad = value; }
+
+        }
+
+        public string TipoPropiedad 
+        {
+            get { return tipoPropiedad; }
+            set { tipoPropiedad = value; }
 
         }
     }

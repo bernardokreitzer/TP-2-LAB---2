@@ -9,7 +9,7 @@ namespace TP_2_LAB___2
     [Serializable]
     class Habitacion : Propiedad
     { 
-        public Habitacion(string nombre, int numero) : base(nombre, numero)
+        public Habitacion(string nombre, int numero, string propiedad) : base(nombre, numero, propiedad)
         {
 
         }

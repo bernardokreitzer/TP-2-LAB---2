@@ -14,12 +14,14 @@ namespace TP_2_LAB___2
         private double precioBase;
         private Cliente[] clientes;
         private ArrayList propiedades;
+        private List<Propiedad> propiedades2;
 
         public Sistema(double precioBase)
         {
             reservas = new ArrayList();
             this.precioBase = precioBase;
             propiedades = new ArrayList();
+            propiedades2 = new List<Propiedad>();
         }
 
         public void AgregarCliente()
@@ -29,22 +31,24 @@ namespace TP_2_LAB___2
 
         public void  ModificarPropiedad(int indice, string direccion, int numeroPropiedad )
         {
+            propiedades2[indice].Direccion = direccion;
+            propiedades2[indice].Numero = numeroPropiedad;
             
-        }
+                }
 
         public Propiedad BuscarPropiedad(int indice)
         {
-            return (Propiedad)propiedades[indice];
+            return propiedades2[indice];
         }
 
         public void AgregarPropiedades(Propiedad unaPropiedad)
         {
-            propiedades.Add(unaPropiedad);
+            propiedades2.Add(unaPropiedad);
         }
 
-        public  ArrayList ListarPropiedades()
+        public List<Propiedad> ListarPropiedades()
         {
-            return propiedades;
+            return propiedades2;
         }
 
 

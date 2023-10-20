@@ -9,7 +9,7 @@ namespace TP_2_LAB___2
     [Serializable]
     class CasaPorDia : Propiedad
     {
-        public CasaPorDia(string nombre, int numero):base(nombre , numero)
+        public CasaPorDia(string nombre, int numero, string TipoPropiedad):base(nombre , numero, TipoPropiedad)
         {
 
         }
