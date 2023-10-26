@@ -14,6 +14,7 @@ namespace TP_2_LAB___2
         private DateTime fechaCheckIn;
         private DateTime fechaCheckOut;
         private Propiedad alojamiento;
+        private Cliente nuevoCliente;
 
 
         private string nombre;
@@ -22,16 +23,18 @@ namespace TP_2_LAB___2
         private double precio;
         private int plazas;
 
-        public Reserva (DateTime checkIn, DateTime checkOut, Propiedad alojamiento)
+        public Reserva (DateTime checkIn, DateTime checkOut, Propiedad alojamiento, Cliente unCliente)
         {
             fechaReserva = DateTime.Now.Date;
             fechaCheckIn = checkIn;
             fechaCheckOut = checkOut;
             this.alojamiento = alojamiento;
+            nuevoCliente = unCliente;
         }
         public DateTime FechaReserva { get; }
         public DateTime FechaCheckin { get; }
         public Propiedad Alojamiento { get{ return alojamiento; } }
+        public Cliente NuevoCliente { get { return nuevoCliente; } }
 
 
 

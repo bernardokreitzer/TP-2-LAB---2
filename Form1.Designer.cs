@@ -36,10 +36,10 @@ namespace TP_2_LAB___2
             this.lBoxAlojamientos = new System.Windows.Forms.ListBox();
             this.labAlojamiento = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.btnBorrarCliente = new System.Windows.Forms.Button();
+            this.btnModificarCliente = new System.Windows.Forms.Button();
+            this.btnRegistrarCliente = new System.Windows.Forms.Button();
+            this.lbClientes = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnBorrarReservas = new System.Windows.Forms.Button();
@@ -47,6 +47,7 @@ namespace TP_2_LAB___2
             this.btnAltaReservas = new System.Windows.Forms.Button();
             this.lbReservas = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnSalir = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -122,54 +123,57 @@ namespace TP_2_LAB___2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.Highlight;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.button3);
-            this.panel2.Controls.Add(this.button4);
-            this.panel2.Controls.Add(this.listBox1);
+            this.panel2.Controls.Add(this.btnBorrarCliente);
+            this.panel2.Controls.Add(this.btnModificarCliente);
+            this.panel2.Controls.Add(this.btnRegistrarCliente);
+            this.panel2.Controls.Add(this.lbClientes);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Location = new System.Drawing.Point(463, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(390, 323);
             this.panel2.TabIndex = 1;
             // 
-            // button2
+            // btnBorrarCliente
             // 
-            this.button2.BackColor = System.Drawing.Color.Firebrick;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button2.Location = new System.Drawing.Point(20, 237);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(101, 39);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Borrar";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnBorrarCliente.BackColor = System.Drawing.Color.Firebrick;
+            this.btnBorrarCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBorrarCliente.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnBorrarCliente.Location = new System.Drawing.Point(20, 237);
+            this.btnBorrarCliente.Name = "btnBorrarCliente";
+            this.btnBorrarCliente.Size = new System.Drawing.Size(101, 39);
+            this.btnBorrarCliente.TabIndex = 4;
+            this.btnBorrarCliente.Text = "Borrar";
+            this.btnBorrarCliente.UseVisualStyleBackColor = false;
+            this.btnBorrarCliente.Click += new System.EventHandler(this.btnBorrarCliente_Click);
             // 
-            // button3
+            // btnModificarCliente
             // 
-            this.button3.Location = new System.Drawing.Point(20, 171);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(101, 39);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Modificar";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnModificarCliente.Location = new System.Drawing.Point(20, 171);
+            this.btnModificarCliente.Name = "btnModificarCliente";
+            this.btnModificarCliente.Size = new System.Drawing.Size(101, 39);
+            this.btnModificarCliente.TabIndex = 3;
+            this.btnModificarCliente.Text = "Modificar";
+            this.btnModificarCliente.UseVisualStyleBackColor = true;
+            this.btnModificarCliente.Click += new System.EventHandler(this.btnModificarCliente_Click);
             // 
-            // button4
+            // btnRegistrarCliente
             // 
-            this.button4.Location = new System.Drawing.Point(20, 95);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(101, 39);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "Registrar";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnRegistrarCliente.Location = new System.Drawing.Point(20, 95);
+            this.btnRegistrarCliente.Name = "btnRegistrarCliente";
+            this.btnRegistrarCliente.Size = new System.Drawing.Size(101, 39);
+            this.btnRegistrarCliente.TabIndex = 2;
+            this.btnRegistrarCliente.Text = "Registrar";
+            this.btnRegistrarCliente.UseVisualStyleBackColor = true;
+            this.btnRegistrarCliente.Click += new System.EventHandler(this.btnRegistrarCliente_Click);
             // 
-            // listBox1
+            // lbClientes
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(139, 53);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(235, 228);
-            this.listBox1.TabIndex = 1;
+            this.lbClientes.FormattingEnabled = true;
+            this.lbClientes.ItemHeight = 16;
+            this.lbClientes.Location = new System.Drawing.Point(139, 53);
+            this.lbClientes.Name = "lbClientes";
+            this.lbClientes.Size = new System.Drawing.Size(235, 228);
+            this.lbClientes.TabIndex = 1;
             // 
             // label1
             // 
@@ -245,17 +249,29 @@ namespace TP_2_LAB___2
             this.label2.TabIndex = 0;
             this.label2.Text = "Reservas";
             // 
+            // btnSalir
+            // 
+            this.btnSalir.Location = new System.Drawing.Point(59, 347);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(97, 36);
+            this.btnSalir.TabIndex = 3;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.ClientSize = new System.Drawing.Size(1604, 532);
+            this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -276,10 +292,10 @@ namespace TP_2_LAB___2
         private System.Windows.Forms.ListBox lBoxAlojamientos;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button btnBorrarCliente;
+        private System.Windows.Forms.Button btnModificarCliente;
+        private System.Windows.Forms.Button btnRegistrarCliente;
+        private System.Windows.Forms.ListBox lbClientes;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnBorrarReservas;
@@ -287,6 +303,7 @@ namespace TP_2_LAB___2
         private System.Windows.Forms.Button btnAltaReservas;
         private System.Windows.Forms.ListBox lbReservas;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnSalir;
     }
 }
 

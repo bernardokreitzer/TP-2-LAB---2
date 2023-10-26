@@ -17,6 +17,7 @@ namespace TP_2_LAB___2
 {
     public partial class Form1 : Form
     {
+
         public Form1()
         {
             InitializeComponent();
@@ -25,18 +26,88 @@ namespace TP_2_LAB___2
         Sistema miSistema;
         Propiedad nuevoAlojamiento;
         double precioBase;
-
         protected ArrayList alojamientos = new ArrayList();
+        string miarchivo = Application.StartupPath + ("\\reservas.txt");
+        FileStream miStream;
+
+        private void Form1_Load(object sender, EventArgs e)
+        {          //VENTANA INICIAL
+            //FPrecioBase vPrecioBase = new FPrecioBase();
+            //if (vPrecioBase.ShowDialog() == DialogResult.OK)
+            //{
+            //    precioBase = Convert.ToDouble(vPrecioBase.tbPrecioBase.Text);
+            //    //miSistema = new Sistema(precioBase);
+            //    MessageBox.Show($"Precio base: {precioBase} ingresado correctamente");
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Cancelado por usuario");
+            //}
+            //miSistema.AgregarPropiedades(new Propiedad("Colon 236", 20, "Casa Por Dia"));
+            //miSistema.AgregarPropiedades(new Propiedad("San Juan 555", 30, "Casa Por Dia"));
+
+            //miSistema.AgregarCliente("Diego Perez", 22654987, "Callao 50");
+            //miSistema.AgregarCliente("Jose Comez", 29854987, "Calle D 25");
+
+            //  alojamientos.Add(new Propiedad("San Juan 555", 30));
+
+            //  Deserializar();
+            // 1. Crear Stream
+            miStream = new FileStream(miarchivo, FileMode.Open, FileAccess.Read, FileShare.None);
+
+            // 2.- Crear Formateador
+            BinaryFormatter formateador = new BinaryFormatter();
+
+            // 3.- Serialiar
+            miSistema = (Sistema)formateador.Deserialize(miStream);
+            //laAgenda = (agenda)serUnser.Deserialize(archivo);
+
+            // 4.- Cerrar Stream
+            miStream.Close();
+
+            CargarDatos();
+        }
 
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {     // Proceso De Serializar
+
+            // 1. Crear Stream
+             miStream = new FileStream(miarchivo, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
+
+            // 2.- Crear Formateador
+            BinaryFormatter formateador = new BinaryFormatter();
+
+            // 3.- Serialiar
+            formateador.Serialize(miStream, miSistema);
+
+            // 4.- Cerrar Stream
+            miStream.Close();
+
+        }
 
 
-        private void ListarAlojamientos() 
+        private void CargarDatos() 
         {
             lBoxAlojamientos.Items.Clear();
-            foreach (Propiedad p in miSistema.ListarPropiedades())
+            lbClientes.Items.Clear();
+            lbReservas.Items.Clear();
+;            foreach (Propiedad p in miSistema.ListarPropiedades())
             {
                 lBoxAlojamientos.Items.Add(p.Direccion + " " + p.Numero + " " + p.TipoPropiedad);
+            }
+
+            foreach(Cliente c in miSistema.ListarClientes())
+            {
+                lbClientes.Items.Add($"Nombre: {c.Nombre}");
+            }
+
+            int cantreservas = 1;
+            foreach (Reserva r in miSistema.ListarReservas())
+            {
+                lbReservas.Items.Add(cantreservas.ToString("00") + " " + r.NuevoCliente.Nombre + " " + r.Alojamiento.Direccion + " - Reservado: " + r.FechaCheckin.ToString("dd-MM-yyyy"));
+                //lbReservas.Items.Add(r.FechaCheckin.ToString("dddd", new CultureInfo("es-ES")));
+                cantreservas++;
             }
         }
 
@@ -52,28 +123,14 @@ namespace TP_2_LAB___2
 
                 miSistema.AgregarPropiedades(new Propiedad(direccion, numeroPropiedad, tipoAlojamiento));
                 //   alojamientos.Add();
-                ListarAlojamientos();
+                CargarDatos();
             }
             vCargaAlojamiento.Dispose();
         }
 
         private void Deserializar()
         {
-            // Proceso De Serializar
-
-            // 1. Crear Stream
-           // FileStream miStream = new FileStream("C:/Users/alexx/Documents/alojamientos.dat", FileMode.Open, FileAccess.Read, FileShare.None);
-
-            // 2.- Crear Formateador
-           // BinaryFormatter formateador = new BinaryFormatter();
-
-            // 3.- DeSerialiar
-            //nuevoAlojamiento = (Propiedad)formateador.Deserialize(miStream);
-            //alojamientos[0] = nuevoAlojamiento;
-
-
-            // 4.- Cerrar Stream
-            //miStream.Close();
+            
         }
 
         private void Serializar()
@@ -87,45 +144,16 @@ namespace TP_2_LAB___2
             BinaryFormatter formateador = new BinaryFormatter();
 
             // 3.- Serialiar
-            formateador.Serialize(miStream, alojamientos[0]);
-            formateador.Serialize(miStream, alojamientos[1]);
+            formateador.Serialize(miStream, miSistema);
+            
 
             // 4.- Cerrar Stream
             miStream.Close();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
-            //VENTANA INICIAL
-            FPrecioBase vPrecioBase = new FPrecioBase();
-
-            if (vPrecioBase.ShowDialog() == DialogResult.OK)
-            {
-                 precioBase = Convert.ToDouble(vPrecioBase.tbPrecioBase.Text);
-                miSistema = new Sistema(precioBase);
-                MessageBox.Show($"Precio base: {precioBase} ingresado correctamente");
-            }
-
-            else
-            {
-                MessageBox.Show("Cancelado por usuario");
-            }      
-            miSistema.AgregarPropiedades(new Propiedad("Colon 236", 20, "Casa Por Dia"));
-            miSistema.AgregarPropiedades(new Propiedad("San Juan 555", 30, "Casa Por Dia"));
-
-            //  alojamientos.Add(new Propiedad("San Juan 555", 30));
-
-
-            //  Deserializar();
-
-            ListarAlojamientos();
-        }
-
-
+  
         private void btnModificar_Click(object sender, EventArgs e)
         {
-
             FCargaAlojamientos fModificarAlojamiento = new FCargaAlojamientos();
             int itemSeleccionado = lBoxAlojamientos.SelectedIndex;
             int totalPropiedades = miSistema.cantLista();
@@ -147,7 +175,7 @@ namespace TP_2_LAB___2
 
                     miSistema.ModificarPropiedad(itemSeleccionado, direccion, numeroPropiedad);
                     //alojamientos.Add(new Propiedad(direccion, numeroPropiedad));
-                    ListarAlojamientos();
+                    CargarDatos();
                 }
             }
 
@@ -161,8 +189,6 @@ namespace TP_2_LAB___2
             //fModificarAlojamiento.tbDireccion.Text = ((Propiedad)alojamientos[itemSeleccionado]).Direccion;
             //fModificarAlojamiento.tbNroPropiedad.Text = ((Propiedad)alojamientos[itemSeleccionado]).Numero.ToString();
 
-
-
             //int numeroPropiedad = Convert.ToInt32(fModificarAlojamiento.tbNroPropiedad.Text);
             
             //string direccion = vCargaAlojamiento.tbDireccion.Text;
@@ -172,20 +198,20 @@ namespace TP_2_LAB___2
         private void btnAltaReservas_Click(object sender, EventArgs e)
         {
             FAltaReservas vReservas = new FAltaReservas();
-            //string[] datos2 = miSistema.ListarPropiedades().ToArray();
-            string[] datos = { "Opción 1", "Opción 2", "Opción 3", "Opción 4" };
-
+           
             foreach(Propiedad p in miSistema.ListarPropiedades())
             {
                 vReservas.cbAlojamientos.Items.Add(p.Direccion);
-
+            }
+            foreach(Cliente c in miSistema.ListarClientes())
+            {
+                vReservas.cbListaClientes.Items.Add(c.Nombre);
             }
 
            // vReservas.cbAlojamientos.Items.AddRange(datos);
 
             if (vReservas.ShowDialog() == DialogResult.OK)
             {
-
                 DateTime fechaInicio = vReservas.dateTimePicker1.Value;
                 DateTime fechaFin = vReservas.dateTimePicker2.Value;
 
@@ -194,25 +220,28 @@ namespace TP_2_LAB___2
                 int alojamientoSeleccionadoindice = vReservas.cbAlojamientos.SelectedIndex;
                 Propiedad alojamientoSeleccionado = miSistema.BuscarPropiedad(alojamientoSeleccionadoindice);
 
+                int indiceclienteSeleccionado = vReservas.cbListaClientes.SelectedIndex;
+                Cliente clienteSeleccionado = miSistema.BuscarCliente(indiceclienteSeleccionado);
                 MessageBox.Show($"Fecha de inicio: {fechaInicio}\nFecha de fin: {fechaFin}\n Total Dias: { diasDiferencia}\n Lugar: {alojamientoSeleccionado.Direccion}");
 
-                miSistema.AgregarReserva(fechaInicio, fechaFin, diasDiferencia, alojamientoSeleccionado);
-                int cantreservas = 1;
-                lbReservas.Items.Clear();
-                foreach(Reserva r in miSistema.ListarReservas())
-                {                
-                    lbReservas.Items.Add(cantreservas.ToString("00")  +" - Reserva hecha el: " +  r.FechaCheckin.ToString("dd-MM-yyyy") + r.Alojamiento.Direccion);
-                    //lbReservas.Items.Add(r.FechaCheckin.ToString("dddd", new CultureInfo("es-ES")));
-                    cantreservas++;
-                }
-            
-            
+                miSistema.AgregarReserva(fechaInicio, fechaFin, diasDiferencia, alojamientoSeleccionado, clienteSeleccionado);
+
+                CargarDatos();
+
+
+                //int cantreservas = 1;
+                //lbReservas.Items.Clear();
+                //foreach(Reserva r in miSistema.ListarReservas())
+                //{                
+                //    lbReservas.Items.Add(cantreservas.ToString("00") + " " + r.NuevoCliente.Nombre +  " " + r.Alojamiento.Direccion +  " - Reservado: " +  r.FechaCheckin.ToString("dd-MM-yyyy"));
+                //    //lbReservas.Items.Add(r.FechaCheckin.ToString("dddd", new CultureInfo("es-ES")));
+                //    cantreservas++;
+                //}           
             }
         }
 
         private void BorrarAlojamiento_click(object sender, EventArgs e)
         {            // Borrar propiedad 
-
             try
             {
                 int itemSeleccionado = lBoxAlojamientos.SelectedIndex;
@@ -230,7 +259,7 @@ namespace TP_2_LAB___2
                     // Aquí puedes poner el código para cancelar el cambio.
                     //MessageBox.Show("Cambio cancelado");
                 }
-                ListarAlojamientos();
+                CargarDatos();
             }
 
             catch (Exception ex)
@@ -239,5 +268,36 @@ namespace TP_2_LAB___2
             }
             
         }
+
+        private void btnRegistrarCliente_Click(object sender, EventArgs e)
+        {
+            fRegistrarCliente vRegistrarCliente = new fRegistrarCliente();
+            if ( vRegistrarCliente.ShowDialog() == DialogResult.OK)
+            {
+                miSistema.AgregarCliente(vRegistrarCliente.tbNombreCliente.Text, 
+                    Convert.ToInt32(vRegistrarCliente.tbDniCliente.Text), vRegistrarCliente.tbDireccionCliente.Text);
+                MessageBox.Show($"Cliente {vRegistrarCliente.tbNombreCliente.Text}\n Registrado exitosamente !!");
+            }
+            vRegistrarCliente.Dispose();
+
+            CargarDatos();
+        }
+
+        private void btnModificarCliente_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBorrarCliente_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        
     }
 }

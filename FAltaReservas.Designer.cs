@@ -32,6 +32,8 @@ namespace TP_2_LAB___2
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cbAlojamientos = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cbCochera = new System.Windows.Forms.CheckBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
@@ -45,8 +47,8 @@ namespace TP_2_LAB___2
             this.label1 = new System.Windows.Forms.Label();
             this.btnAltaAlojamiento = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.cbAlojamientos = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cbListaClientes = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -67,6 +69,8 @@ namespace TP_2_LAB___2
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbListaClientes);
+            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.cbAlojamientos);
             this.groupBox1.Controls.Add(this.groupBox2);
@@ -82,6 +86,24 @@ namespace TP_2_LAB___2
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(441, 28);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(191, 20);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Lista de Alojamientos";
+            // 
+            // cbAlojamientos
+            // 
+            this.cbAlojamientos.FormattingEnabled = true;
+            this.cbAlojamientos.Location = new System.Drawing.Point(435, 56);
+            this.cbAlojamientos.Name = "cbAlojamientos";
+            this.cbAlojamientos.Size = new System.Drawing.Size(214, 24);
+            this.cbAlojamientos.TabIndex = 9;
             // 
             // groupBox2
             // 
@@ -231,23 +253,23 @@ namespace TP_2_LAB___2
             this.button1.Text = "Cancelar";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // cbAlojamientos
+            // label7
             // 
-            this.cbAlojamientos.FormattingEnabled = true;
-            this.cbAlojamientos.Location = new System.Drawing.Point(435, 56);
-            this.cbAlojamientos.Name = "cbAlojamientos";
-            this.cbAlojamientos.Size = new System.Drawing.Size(214, 24);
-            this.cbAlojamientos.TabIndex = 9;
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(441, 140);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(152, 20);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Lista de Clientes";
             // 
-            // label6
+            // cbListaClientes
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(441, 28);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(191, 20);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "Lista de Alojamientos";
+            this.cbListaClientes.FormattingEnabled = true;
+            this.cbListaClientes.Location = new System.Drawing.Point(435, 177);
+            this.cbListaClientes.Name = "cbListaClientes";
+            this.cbListaClientes.Size = new System.Drawing.Size(214, 24);
+            this.cbListaClientes.TabIndex = 12;
             // 
             // FAltaReservas
             // 
@@ -286,5 +308,7 @@ namespace TP_2_LAB___2
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label6;
         public System.Windows.Forms.ComboBox cbAlojamientos;
+        public System.Windows.Forms.ComboBox cbListaClientes;
+        private System.Windows.Forms.Label label7;
     }
 }

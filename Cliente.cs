@@ -8,19 +8,21 @@ namespace TP_2_LAB___2
 {
     [Serializable]
 
-    class Cliente: IComparable
+    class Cliente : IComparable
     {
         private string nombreCliente;
         private int dniCliente;
         private string direccionCliente;
 
-        public Cliente (string nom, int dni, string direccion)
+        public Cliente(string nom, int dni, string direccion)
         {
             nombreCliente = nom;
             dniCliente = dni;
             direccionCliente = direccion;
         }
 
+        public string Nombre {get {return nombreCliente ;} }
+    
         public int CompareTo(object obj)
         {
             return this.nombreCliente.CompareTo(((Cliente)obj).nombreCliente);
