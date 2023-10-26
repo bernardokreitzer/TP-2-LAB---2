@@ -49,6 +49,12 @@
     <Compile Include="CasaFindeSemana.cs" />
     <Compile Include="CasaPorDia.cs" />
     <Compile Include="Cliente.cs" />
+    <Compile Include="FAltaReservas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FAltaReservas.Designer.cs">
+      <DependentUpon>FAltaReservas.cs</DependentUpon>
+    </Compile>
     <Compile Include="FCargaAlojamientos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,6 +80,9 @@
     <Compile Include="Propiedad.cs" />
     <Compile Include="Reserva.cs" />
     <Compile Include="Sistema.cs" />
+    <EmbeddedResource Include="FAltaReservas.resx">
+      <DependentUpon>FAltaReservas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FCargaAlojamientos.resx">
       <DependentUpon>FCargaAlojamientos.cs</DependentUpon>
     </EmbeddedResource>

@@ -10,23 +10,23 @@ namespace TP_2_LAB___2
     [Serializable]
     class Sistema
     {
-        protected ArrayList reservas;
+        protected List<Reserva> reservas;
         private double precioBase;
-        private Cliente[] clientes;
+        private List<Cliente> clientes;
         private ArrayList propiedades;
         private List<Propiedad> propiedades2;
 
         public Sistema(double precioBase)
         {
-            reservas = new ArrayList();
+            reservas = new List<Reserva>();
             this.precioBase = precioBase;
             propiedades = new ArrayList();
             propiedades2 = new List<Propiedad>();
         }
 
-        public void AgregarCliente()
+        public void AgregarCliente(Cliente unCliente)
         {
-
+            clientes.Add(unCliente);
         }
 
         public void  ModificarPropiedad(int indice, string direccion, int numeroPropiedad )
@@ -35,6 +35,11 @@ namespace TP_2_LAB___2
             propiedades2[indice].Numero = numeroPropiedad;
             
                 }
+
+        public int cantLista()
+        {
+            return propiedades2.Count;
+        }
 
         public Propiedad BuscarPropiedad(int indice)
         {
@@ -51,11 +56,26 @@ namespace TP_2_LAB___2
             return propiedades2;
         }
 
+        public List<Reserva> ListarReservas()
+        {
+            return reservas;
+        }
+
+        public void BorrarPropiedad(int indice)
+        {
+            propiedades2.RemoveAt(indice);
+        }
+
 
         //public  Propiedad  ListarPropiedades
         //{
         //     get {return propiedades; }
         //}
+
+        public void AgregarReserva(DateTime fechaInicio, DateTime fechaFin, int totDias, Propiedad alojamiento)
+        {
+            reservas.Add(new Reserva(fechaInicio, fechaFin, alojamiento));
+        }
 
         public void ModificarReserva()
         {

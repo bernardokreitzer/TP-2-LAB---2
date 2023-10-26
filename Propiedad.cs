@@ -16,6 +16,8 @@ namespace TP_2_LAB___2
         private int numeroPropiedad;
         protected double precioBase;
         protected string tipoPropiedad;
+        private bool wifi;
+        private bool ac;
 
         public Propiedad(string dir, int numero, string propiedad)
         {

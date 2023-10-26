@@ -42,10 +42,10 @@ namespace TP_2_LAB___2
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.btnBorrarReservas = new System.Windows.Forms.Button();
+            this.btnModificarReservas = new System.Windows.Forms.Button();
+            this.btnAltaReservas = new System.Windows.Forms.Button();
+            this.lbReservas = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -77,6 +77,7 @@ namespace TP_2_LAB___2
             this.button1.TabIndex = 4;
             this.button1.Text = "Borrar";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.BorrarAlojamiento_click);
             // 
             // btnModificar
             // 
@@ -184,54 +185,55 @@ namespace TP_2_LAB___2
             // 
             this.panel3.BackColor = System.Drawing.Color.BurlyWood;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel3.Controls.Add(this.button5);
-            this.panel3.Controls.Add(this.button6);
-            this.panel3.Controls.Add(this.button7);
-            this.panel3.Controls.Add(this.listBox2);
+            this.panel3.Controls.Add(this.btnBorrarReservas);
+            this.panel3.Controls.Add(this.btnModificarReservas);
+            this.panel3.Controls.Add(this.btnAltaReservas);
+            this.panel3.Controls.Add(this.lbReservas);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Location = new System.Drawing.Point(859, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(423, 323);
+            this.panel3.Size = new System.Drawing.Size(527, 323);
             this.panel3.TabIndex = 2;
             // 
-            // button5
+            // btnBorrarReservas
             // 
-            this.button5.BackColor = System.Drawing.Color.Firebrick;
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button5.Location = new System.Drawing.Point(20, 237);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(101, 39);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "Borrar";
-            this.button5.UseVisualStyleBackColor = false;
+            this.btnBorrarReservas.BackColor = System.Drawing.Color.Firebrick;
+            this.btnBorrarReservas.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBorrarReservas.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnBorrarReservas.Location = new System.Drawing.Point(20, 237);
+            this.btnBorrarReservas.Name = "btnBorrarReservas";
+            this.btnBorrarReservas.Size = new System.Drawing.Size(101, 39);
+            this.btnBorrarReservas.TabIndex = 4;
+            this.btnBorrarReservas.Text = "Borrar";
+            this.btnBorrarReservas.UseVisualStyleBackColor = false;
             // 
-            // button6
+            // btnModificarReservas
             // 
-            this.button6.Location = new System.Drawing.Point(20, 171);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(101, 39);
-            this.button6.TabIndex = 3;
-            this.button6.Text = "Modificar";
-            this.button6.UseVisualStyleBackColor = true;
+            this.btnModificarReservas.Location = new System.Drawing.Point(20, 171);
+            this.btnModificarReservas.Name = "btnModificarReservas";
+            this.btnModificarReservas.Size = new System.Drawing.Size(101, 39);
+            this.btnModificarReservas.TabIndex = 3;
+            this.btnModificarReservas.Text = "Modificar";
+            this.btnModificarReservas.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // btnAltaReservas
             // 
-            this.button7.Location = new System.Drawing.Point(20, 95);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(101, 39);
-            this.button7.TabIndex = 2;
-            this.button7.Text = "Dar de Alta";
-            this.button7.UseVisualStyleBackColor = true;
+            this.btnAltaReservas.Location = new System.Drawing.Point(20, 95);
+            this.btnAltaReservas.Name = "btnAltaReservas";
+            this.btnAltaReservas.Size = new System.Drawing.Size(101, 39);
+            this.btnAltaReservas.TabIndex = 2;
+            this.btnAltaReservas.Text = "Dar de Alta";
+            this.btnAltaReservas.UseVisualStyleBackColor = true;
+            this.btnAltaReservas.Click += new System.EventHandler(this.btnAltaReservas_Click);
             // 
-            // listBox2
+            // lbReservas
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 16;
-            this.listBox2.Location = new System.Drawing.Point(139, 53);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(262, 228);
-            this.listBox2.TabIndex = 1;
+            this.lbReservas.FormattingEnabled = true;
+            this.lbReservas.ItemHeight = 16;
+            this.lbReservas.Location = new System.Drawing.Point(139, 53);
+            this.lbReservas.Name = "lbReservas";
+            this.lbReservas.Size = new System.Drawing.Size(381, 228);
+            this.lbReservas.TabIndex = 1;
             // 
             // label2
             // 
@@ -280,10 +282,10 @@ namespace TP_2_LAB___2
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.Button btnBorrarReservas;
+        private System.Windows.Forms.Button btnModificarReservas;
+        private System.Windows.Forms.Button btnAltaReservas;
+        private System.Windows.Forms.ListBox lbReservas;
         private System.Windows.Forms.Label label2;
     }
 }

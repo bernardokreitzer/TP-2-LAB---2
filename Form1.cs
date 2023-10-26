@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Globalization;
 
 namespace TP_2_LAB___2
 {
@@ -25,9 +26,19 @@ namespace TP_2_LAB___2
         Propiedad nuevoAlojamiento;
         double precioBase;
 
-
-
         protected ArrayList alojamientos = new ArrayList();
+
+
+
+
+        private void ListarAlojamientos() 
+        {
+            lBoxAlojamientos.Items.Clear();
+            foreach (Propiedad p in miSistema.ListarPropiedades())
+            {
+                lBoxAlojamientos.Items.Add(p.Direccion + " " + p.Numero + " " + p.TipoPropiedad);
+            }
+        }
 
         private void btnAltaAlojamiento_Click(object sender, EventArgs e)
         {
@@ -40,13 +51,8 @@ namespace TP_2_LAB___2
                 string tipoAlojamiento = vCargaAlojamiento.cbTipoAlojamiento.Text;
 
                 miSistema.AgregarPropiedades(new Propiedad(direccion, numeroPropiedad, tipoAlojamiento));
-                 //   alojamientos.Add();
-                lBoxAlojamientos.Items.Clear();
-                foreach (Propiedad p in miSistema.ListarPropiedades())
-                {
-                    lBoxAlojamientos.Items.Add(p.Direccion + " " + p.Numero + " " + p.TipoPropiedad );
-                }
-
+                //   alojamientos.Add();
+                ListarAlojamientos();
             }
             vCargaAlojamiento.Dispose();
         }
@@ -91,7 +97,6 @@ namespace TP_2_LAB___2
         private void Form1_Load(object sender, EventArgs e)
         {
             
-
             //VENTANA INICIAL
             FPrecioBase vPrecioBase = new FPrecioBase();
 
@@ -100,78 +105,139 @@ namespace TP_2_LAB___2
                  precioBase = Convert.ToDouble(vPrecioBase.tbPrecioBase.Text);
                 miSistema = new Sistema(precioBase);
                 MessageBox.Show($"Precio base: {precioBase} ingresado correctamente");
-
             }
 
             else
             {
                 MessageBox.Show("Cancelado por usuario");
-            }
-
-            
-
+            }      
             miSistema.AgregarPropiedades(new Propiedad("Colon 236", 20, "Casa Por Dia"));
             miSistema.AgregarPropiedades(new Propiedad("San Juan 555", 30, "Casa Por Dia"));
-
-
-            
-
 
             //  alojamientos.Add(new Propiedad("San Juan 555", 30));
 
 
             //  Deserializar();
 
-            lBoxAlojamientos.Items.Clear();
-            foreach(Propiedad p in miSistema.ListarPropiedades())
-            {
-                lBoxAlojamientos.Items.Add(p.Direccion + " " + p.Numero + " " + p.TipoPropiedad);
-            }
+            ListarAlojamientos();
         }
+
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
+
             FCargaAlojamientos fModificarAlojamiento = new FCargaAlojamientos();
             int itemSeleccionado = lBoxAlojamientos.SelectedIndex;
+            int totalPropiedades = miSistema.cantLista();
+            try  
+            {
+                fModificarAlojamiento.tbDireccion.Text = miSistema.BuscarPropiedad(itemSeleccionado).Direccion;
+                fModificarAlojamiento.tbNroPropiedad.Text = miSistema.BuscarPropiedad(itemSeleccionado).Numero.ToString();
+                fModificarAlojamiento.cbTipoAlojamiento.Text = miSistema.BuscarPropiedad(itemSeleccionado).TipoPropiedad;
+
+                int numeroPropiedad;
+
+                if (fModificarAlojamiento.ShowDialog() == DialogResult.OK)
+                {
+                    string direccion = fModificarAlojamiento.tbDireccion.Text;
+                    numeroPropiedad = Convert.ToInt32(fModificarAlojamiento.tbNroPropiedad.Text);
+
+                    //  ((Propiedad)alojamientos[itemSeleccionado]).Direccion = direccion;
+                    // ((Propiedad)alojamientos[itemSeleccionado]).Numero = numeroPropiedad;
+
+                    miSistema.ModificarPropiedad(itemSeleccionado, direccion, numeroPropiedad);
+                    //alojamientos.Add(new Propiedad(direccion, numeroPropiedad));
+                    ListarAlojamientos();
+                }
+            }
+
+            catch (ArgumentOutOfRangeException  ex)
+            {
+                // Manejo de la excepción
+                MessageBox.Show("Debe seleccionar un item de la lista" );
+            }
 
             //fModificarAlojamiento.tbDireccion.Text = "hola";
-
             //fModificarAlojamiento.tbDireccion.Text = ((Propiedad)alojamientos[itemSeleccionado]).Direccion;
             //fModificarAlojamiento.tbNroPropiedad.Text = ((Propiedad)alojamientos[itemSeleccionado]).Numero.ToString();
 
-            fModificarAlojamiento.tbDireccion.Text = miSistema.BuscarPropiedad(itemSeleccionado).Direccion;
-            fModificarAlojamiento.tbNroPropiedad.Text = miSistema.BuscarPropiedad(itemSeleccionado).Numero.ToString();
 
-            int numeroPropiedad = Convert.ToInt32(fModificarAlojamiento.tbNroPropiedad.Text);
 
-            if (fModificarAlojamiento.ShowDialog() == DialogResult.OK)
+            //int numeroPropiedad = Convert.ToInt32(fModificarAlojamiento.tbNroPropiedad.Text);
+            
+            //string direccion = vCargaAlojamiento.tbDireccion.Text;
+            //int numeroPropiedad = Convert.ToInt32(vCargaAlojamiento.tbNroPropiedad.Text);
+        }
+
+        private void btnAltaReservas_Click(object sender, EventArgs e)
+        {
+            FAltaReservas vReservas = new FAltaReservas();
+            //string[] datos2 = miSistema.ListarPropiedades().ToArray();
+            string[] datos = { "Opción 1", "Opción 2", "Opción 3", "Opción 4" };
+
+            foreach(Propiedad p in miSistema.ListarPropiedades())
             {
-                string direccion = fModificarAlojamiento.tbDireccion.Text;
-                numeroPropiedad = Convert.ToInt32(fModificarAlojamiento.tbNroPropiedad.Text);
-
-
-
-              //  ((Propiedad)alojamientos[itemSeleccionado]).Direccion = direccion;
-              //  ((Propiedad)alojamientos[itemSeleccionado]).Numero = numeroPropiedad;
-
-                miSistema.ModificarPropiedad(itemSeleccionado, direccion, numeroPropiedad);
-
-                
-
-                //alojamientos.Add(new Propiedad(direccion, numeroPropiedad));
-                this.lBoxAlojamientos.Items.Clear();
-                foreach (Propiedad p in miSistema.ListarPropiedades())
-                {
-                    lBoxAlojamientos.Items.Add(p.Direccion + " " + p.Numero);
-                }
+                vReservas.cbAlojamientos.Items.Add(p.Direccion);
 
             }
 
-            //string direccion = vCargaAlojamiento.tbDireccion.Text;
-            //int numeroPropiedad = Convert.ToInt32(vCargaAlojamiento.tbNroPropiedad.Text);
+           // vReservas.cbAlojamientos.Items.AddRange(datos);
 
+            if (vReservas.ShowDialog() == DialogResult.OK)
+            {
 
+                DateTime fechaInicio = vReservas.dateTimePicker1.Value;
+                DateTime fechaFin = vReservas.dateTimePicker2.Value;
 
+                TimeSpan diferencia = fechaFin - fechaInicio;
+                int diasDiferencia = diferencia.Days;
+                int alojamientoSeleccionadoindice = vReservas.cbAlojamientos.SelectedIndex;
+                Propiedad alojamientoSeleccionado = miSistema.BuscarPropiedad(alojamientoSeleccionadoindice);
+
+                MessageBox.Show($"Fecha de inicio: {fechaInicio}\nFecha de fin: {fechaFin}\n Total Dias: { diasDiferencia}\n Lugar: {alojamientoSeleccionado.Direccion}");
+
+                miSistema.AgregarReserva(fechaInicio, fechaFin, diasDiferencia, alojamientoSeleccionado);
+                int cantreservas = 1;
+                lbReservas.Items.Clear();
+                foreach(Reserva r in miSistema.ListarReservas())
+                {                
+                    lbReservas.Items.Add(cantreservas.ToString("00")  +" - Reserva hecha el: " +  r.FechaCheckin.ToString("dd-MM-yyyy") + r.Alojamiento.Direccion);
+                    //lbReservas.Items.Add(r.FechaCheckin.ToString("dddd", new CultureInfo("es-ES")));
+                    cantreservas++;
+                }
+            
+            
+            }
+        }
+
+        private void BorrarAlojamiento_click(object sender, EventArgs e)
+        {            // Borrar propiedad 
+
+            try
+            {
+                int itemSeleccionado = lBoxAlojamientos.SelectedIndex;
+                string propiedadSeleccionada = miSistema.BuscarPropiedad(itemSeleccionado).Direccion;
+
+                DialogResult result = MessageBox.Show($"La propiedad {propiedadSeleccionada} sera borrada\n¿Desea confirmar el cambio?", "Confirmar", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (result == DialogResult.OK)
+                {
+                    // Aquí puedes poner el código para confirmar el cambio.
+                    MessageBox.Show("Cambio confirmado");
+                    miSistema.BorrarPropiedad(itemSeleccionado);
+                }
+                else
+                {
+                    // Aquí puedes poner el código para cancelar el cambio.
+                    //MessageBox.Show("Cambio cancelado");
+                }
+                ListarAlojamientos();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Debe seleccionar un item de la lista");
+            }
+            
         }
     }
 }

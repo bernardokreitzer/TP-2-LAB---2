@@ -32,12 +32,12 @@ namespace TP_2_LAB___2
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbTipoAlojamiento = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.tbNroPropiedad = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tbDireccion = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cbTipoAlojamiento = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,6 +74,27 @@ namespace TP_2_LAB___2
             this.panel1.Size = new System.Drawing.Size(350, 198);
             this.panel1.TabIndex = 4;
             // 
+            // cbTipoAlojamiento
+            // 
+            this.cbTipoAlojamiento.FormattingEnabled = true;
+            this.cbTipoAlojamiento.Items.AddRange(new object[] {
+            "Habitacion",
+            "Casa Por Dia",
+            "Casa Fin de Semana"});
+            this.cbTipoAlojamiento.Location = new System.Drawing.Point(159, 22);
+            this.cbTipoAlojamiento.Name = "cbTipoAlojamiento";
+            this.cbTipoAlojamiento.Size = new System.Drawing.Size(156, 24);
+            this.cbTipoAlojamiento.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 29);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(132, 17);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Tipo de alojamiento";
+            // 
             // tbNroPropiedad
             // 
             this.tbNroPropiedad.Location = new System.Drawing.Point(159, 126);
@@ -94,7 +115,7 @@ namespace TP_2_LAB___2
             // 
             this.tbDireccion.Location = new System.Drawing.Point(159, 77);
             this.tbDireccion.Name = "tbDireccion";
-            this.tbDireccion.Size = new System.Drawing.Size(100, 22);
+            this.tbDireccion.Size = new System.Drawing.Size(156, 22);
             this.tbDireccion.TabIndex = 5;
             // 
             // label1
@@ -105,27 +126,6 @@ namespace TP_2_LAB___2
             this.label1.Size = new System.Drawing.Size(67, 17);
             this.label1.TabIndex = 3;
             this.label1.Text = "Direccion";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 29);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(132, 17);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Tipo de alojamiento";
-            // 
-            // cbTipoAlojamiento
-            // 
-            this.cbTipoAlojamiento.FormattingEnabled = true;
-            this.cbTipoAlojamiento.Items.AddRange(new object[] {
-            "Habitacion",
-            "Casa Por Dia",
-            "Casa Fin de Semana"});
-            this.cbTipoAlojamiento.Location = new System.Drawing.Point(159, 22);
-            this.cbTipoAlojamiento.Name = "cbTipoAlojamiento";
-            this.cbTipoAlojamiento.Size = new System.Drawing.Size(121, 24);
-            this.cbTipoAlojamiento.TabIndex = 7;
             // 
             // FCargaAlojamientos
             // 
