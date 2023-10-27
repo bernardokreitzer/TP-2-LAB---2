@@ -28,6 +28,7 @@ namespace TP_2_LAB___2
         Propiedad nuevoAlojamiento;
         double precioBase;
         protected ArrayList alojamientos = new ArrayList();
+        string pathDatos = Application.StartupPath + ("\\datos.dat");
         string miarchivo = Application.StartupPath + ("\\reservas.txt");
         FileStream miStream;
 
@@ -53,41 +54,50 @@ namespace TP_2_LAB___2
 
 
             // ----------------------------------------------------    
-            //VENTANA INICIAL
-            //FPrecioBase vPrecioBase = new FPrecioBase();
-            //if (vPrecioBase.ShowDialog() == DialogResult.OK)
-            //{
-            //    precioBase = Convert.ToDouble(vPrecioBase.tbPrecioBase.Text);
-            //    //miSistema = new Sistema(precioBase);
-            //    MessageBox.Show($"Precio base: {precioBase} ingresado correctamente");
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Cancelado por usuario");
-            //}
-            //miSistema.AgregarPropiedades(new Propiedad("Colon 236", 20, "Casa Por Dia"));
-            //miSistema.AgregarPropiedades(new Propiedad("San Juan 555", 30, "Casa Por Dia"));
+            
 
-            //miSistema.AgregarCliente("Diego Perez", 22654987, "Callao 50");
-            //miSistema.AgregarCliente("Jose Comez", 29854987, "Calle D 25");
+            if(File.Exists(pathDatos))
+            {
+                //  Deserializar();
+                // 1. Crear Stream
+                miStream = new FileStream(pathDatos, FileMode.Open, FileAccess.Read, FileShare.None);
 
-            //  alojamientos.Add(new Propiedad("San Juan 555", 30));
+                // 2.- Crear Formateador
+                BinaryFormatter formateador = new BinaryFormatter();
 
-            //  Deserializar();
-            // 1. Crear Stream
-            miStream = new FileStream(miarchivo, FileMode.Open, FileAccess.Read, FileShare.None);
+                // 3.- Serialiar
+                miSistema = (Sistema)formateador.Deserialize(miStream);
+                //laAgenda = (agenda)serUnser.Deserialize(archivo);
 
-            // 2.- Crear Formateador
-            BinaryFormatter formateador = new BinaryFormatter();
+                // 4.- Cerrar Stream
+                miStream.Close();
 
-            // 3.- Serialiar
-            miSistema = (Sistema)formateador.Deserialize(miStream);
-            //laAgenda = (agenda)serUnser.Deserialize(archivo);
+                CargarDatos();
+            }
+            else
+            {
+                //VENTANA INICIAL
+                FPrecioBase vPrecioBase = new FPrecioBase();
+                if (vPrecioBase.ShowDialog() == DialogResult.OK)
+                {
+                    precioBase = Convert.ToDouble(vPrecioBase.tbPrecioBase.Text);
+                    miSistema = new Sistema(precioBase);
+                    MessageBox.Show($"Precio base: {precioBase} ingresado correctamente");
+                }
+                else
+                {
+                    MessageBox.Show("Cancelado por usuario");
+                }
+                vPrecioBase.Dispose();
+                //miSistema.AgregarPropiedades(new Propiedad("Colon 236", 20, "Casa Por Dia"));
+                //miSistema.AgregarPropiedades(new Propiedad("San Juan 555", 30, "Casa Por Dia"));
 
-            // 4.- Cerrar Stream
-            miStream.Close();
+                //miSistema.AgregarCliente("Diego Perez", 22654987, "Callao 50");
+                //miSistema.AgregarCliente("Jose Comez", 29854987, "Calle D 25");
 
-            CargarDatos();
+                //  alojamientos.Add(new Propiedad("San Juan 555", 30));
+            }
+
         }
 
 
@@ -95,17 +105,24 @@ namespace TP_2_LAB___2
         {     // Proceso De Serializar
 
             // 1. Crear Stream
-             miStream = new FileStream(miarchivo, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
+             miStream = new FileStream(pathDatos, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
+            try
+            {
+                // 2.- Crear Formateador
+                BinaryFormatter formateador = new BinaryFormatter();
 
-            // 2.- Crear Formateador
-            BinaryFormatter formateador = new BinaryFormatter();
-
-            // 3.- Serialiar
-            formateador.Serialize(miStream, miSistema);
-
-            // 4.- Cerrar Stream
-            miStream.Close();
-
+                // 3.- Serialiar
+                formateador.Serialize(miStream, miSistema);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                // 4.- Cerrar Stream
+                if (miStream != null) miStream.Close();
+            }
         }
 
 
@@ -300,7 +317,7 @@ namespace TP_2_LAB___2
                 CargarDatos();
             }
 
-            catch (Exception ex)
+            catch //(Exception ex)
             {
                 MessageBox.Show("Debe seleccionar un item de la lista");
             }
