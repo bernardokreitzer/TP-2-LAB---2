@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Globalization;
+using System.Drawing.Drawing2D;
 
 namespace TP_2_LAB___2
 {
@@ -31,7 +32,28 @@ namespace TP_2_LAB___2
         FileStream miStream;
 
         private void Form1_Load(object sender, EventArgs e)
-        {          //VENTANA INICIAL
+        {     // Bordes Ventana
+            GraphicsPath path = new GraphicsPath();
+            int radius = 20; // Ajusta el radio según tu preferencia
+
+            path.AddArc(0, 0, radius, radius, 180, 90);
+            path.AddArc(this.Width - radius, 0, radius, radius, 270, 90);
+            path.AddArc(this.Width - radius, this.Height - radius, radius, radius, 0, 90);
+            path.AddArc(0, this.Height - radius, radius, radius, 90, 90);
+
+            this.Region = new Region(path);
+
+            // Posicion Inicial
+            // Cambiar la posición de la ventana a las coordenadas (x, y)
+            // Obtener el tamaño de la pantalla
+            Screen screen = Screen.FromControl(this);
+            int x = (screen.WorkingArea.Width - this.Width) / 2;
+            int y = (screen.WorkingArea.Height - this.Height) / 2;
+            this.Location = new Point(x, y);
+
+
+            // ----------------------------------------------------    
+            //VENTANA INICIAL
             //FPrecioBase vPrecioBase = new FPrecioBase();
             //if (vPrecioBase.ShowDialog() == DialogResult.OK)
             //{
@@ -91,7 +113,8 @@ namespace TP_2_LAB___2
         {
             lBoxAlojamientos.Items.Clear();
             lbClientes.Items.Clear();
-            lbReservas.Items.Clear();
+            dataGridView1.Rows.Clear();
+            //lbReservas.Items.Clear();
 ;            foreach (Propiedad p in miSistema.ListarPropiedades())
             {
                 lBoxAlojamientos.Items.Add(p.Direccion + " " + p.Numero + " " + p.TipoPropiedad);
@@ -99,16 +122,32 @@ namespace TP_2_LAB___2
 
             foreach(Cliente c in miSistema.ListarClientes())
             {
-                lbClientes.Items.Add($"Nombre: {c.Nombre}");
+                lbClientes.Items.Add($"{c.Nombre} - {c.Direccion}");
             }
 
             int cantreservas = 1;
             foreach (Reserva r in miSistema.ListarReservas())
             {
-                lbReservas.Items.Add(cantreservas.ToString("00") + " " + r.NuevoCliente.Nombre + " " + r.Alojamiento.Direccion + " - Reservado: " + r.FechaCheckin.ToString("dd-MM-yyyy"));
+               // lbReservas.Items.Add(cantreservas.ToString("00") + " " + r.NuevoCliente.Nombre + " " + r.Alojamiento.Direccion + " - Reservado: " + r.FechaCheckin.ToString("dd-MM-yyyy"));
                 //lbReservas.Items.Add(r.FechaCheckin.ToString("dddd", new CultureInfo("es-ES")));
+
+                // DataGrid
+                int filaIndex = dataGridView1.Rows.Add(); // Agregar una nueva fila
+                DataGridViewRow fila = dataGridView1.Rows[filaIndex]; // Obtener la fila
+
+                // Asignar los valores de las celdas
+                fila.Cells["Nro"].Value = cantreservas.ToString("00");
+
+                fila.Cells["Nombre"].Value = r.NuevoCliente.Nombre;
+                fila.Cells["Dni"].Value = r.NuevoCliente.Dni;
+
+                fila.Cells["Alojamiento"].Value = r.Alojamiento.Direccion;
+                fila.Cells["Dias"].Value = r.CantDias;
+
                 cantreservas++;
             }
+
+            
         }
 
         private void btnAltaAlojamiento_Click(object sender, EventArgs e)
@@ -146,7 +185,6 @@ namespace TP_2_LAB___2
             // 3.- Serialiar
             formateador.Serialize(miStream, miSistema);
             
-
             // 4.- Cerrar Stream
             miStream.Close();
         }

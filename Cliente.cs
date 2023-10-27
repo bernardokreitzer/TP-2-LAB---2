@@ -22,7 +22,12 @@ namespace TP_2_LAB___2
         }
 
         public string Nombre {get {return nombreCliente ;} }
-    
+
+        public string Direccion { get { return direccionCliente; } }
+
+        public int Dni { get { return dniCliente; } }
+
+
         public int CompareTo(object obj)
         {
             return this.nombreCliente.CompareTo(((Cliente)obj).nombreCliente);

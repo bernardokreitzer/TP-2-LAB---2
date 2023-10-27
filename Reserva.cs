@@ -13,6 +13,7 @@ namespace TP_2_LAB___2
         private DateTime fechaReserva;
         private DateTime fechaCheckIn;
         private DateTime fechaCheckOut;
+        private int cantidadDeDias;
         private Propiedad alojamiento;
         private Cliente nuevoCliente;
 
@@ -28,11 +29,18 @@ namespace TP_2_LAB___2
             fechaReserva = DateTime.Now.Date;
             fechaCheckIn = checkIn;
             fechaCheckOut = checkOut;
+            TimeSpan cantDias = fechaCheckOut - fechaCheckIn;
+            //TimeSpan diferencia = fechaFin - fechaInicio;
+
+
             this.alojamiento = alojamiento;
             nuevoCliente = unCliente;
         }
         public DateTime FechaReserva { get; }
         public DateTime FechaCheckin { get; }
+
+        public int CantDias { get; }
+
         public Propiedad Alojamiento { get{ return alojamiento; } }
         public Cliente NuevoCliente { get { return nuevoCliente; } }
 
