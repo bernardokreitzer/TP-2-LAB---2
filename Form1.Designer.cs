@@ -56,7 +56,7 @@ namespace TP_2_LAB___2
             this.checkin = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.checkout = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            //this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -337,14 +337,14 @@ namespace TP_2_LAB___2
             // 
             // iconButton1
             // 
-            /*this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.PepperHot;
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.PepperHot;
             this.iconButton1.IconColor = System.Drawing.Color.Red;
             this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton1.Location = new System.Drawing.Point(925, 494);
             this.iconButton1.Name = "iconButton1";
             this.iconButton1.Size = new System.Drawing.Size(105, 49);
             this.iconButton1.TabIndex = 5;
-            this.iconButton1.UseVisualStyleBackColor = true;*/
+            this.iconButton1.UseVisualStyleBackColor = true;
             // 
             // panel3
             // 
@@ -362,7 +362,7 @@ namespace TP_2_LAB___2
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(1423, 713);
             this.Controls.Add(this.panel3);
-            //this.Controls.Add(this.iconButton1);
+            this.Controls.Add(this.iconButton1);
             this.Controls.Add(this.btnBorrarReservas);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.btnModificarReservas);
@@ -413,7 +413,7 @@ namespace TP_2_LAB___2
         private System.Windows.Forms.DataGridViewTextBoxColumn checkin;
         private System.Windows.Forms.DataGridViewTextBoxColumn checkout;
         private System.Windows.Forms.DataGridViewTextBoxColumn precio;
-        //private FontAwesome.Sharp.IconButton iconButton1;
+        private FontAwesome.Sharp.IconButton iconButton1;
         private System.Windows.Forms.Panel panel3;
     }
 }
