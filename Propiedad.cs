@@ -18,12 +18,14 @@ namespace TP_2_LAB___2
         protected string tipoPropiedad;
         private bool wifi;
         private bool ac;
+        private List<string> fotos;
 
         public Propiedad(string dir, int numero, string propiedad)
         {
             direccion = dir;
             numeroPropiedad = numero;
             tipoPropiedad = propiedad;
+            fotos = new List<string>();
         }
 
         public string Direccion
@@ -44,6 +46,11 @@ namespace TP_2_LAB___2
             get { return tipoPropiedad; }
             set { tipoPropiedad = value; }
 
+        }
+
+        public void AgregarFoto(string unaFoto)
+        {
+            fotos.Add(unaFoto);
         }
     }
 }

@@ -22,6 +22,7 @@ namespace TP_2_LAB___2
         private string direccion;
         private string localidad;
         private double precio;
+        private double precioFinal;
         private int plazas;
 
         public Reserva (DateTime checkIn, DateTime checkOut, Propiedad alojamiento, Cliente unCliente)
@@ -29,17 +30,23 @@ namespace TP_2_LAB___2
             fechaReserva = DateTime.Now.Date;
             fechaCheckIn = checkIn;
             fechaCheckOut = checkOut;
-            TimeSpan cantDias = fechaCheckOut - fechaCheckIn;
+            TimeSpan diasDiferencia = fechaCheckOut - fechaCheckIn;
+            cantidadDeDias = diasDiferencia.Days;
+            precioFinal = cantidadDeDias * 300;
+            
             //TimeSpan diferencia = fechaFin - fechaInicio;
 
 
             this.alojamiento = alojamiento;
             nuevoCliente = unCliente;
         }
-        public DateTime FechaReserva { get; }
-        public DateTime FechaCheckin { get; }
+        public DateTime FechaReserva { get { return fechaReserva; } }
+        public DateTime FechaCheckin { get { return fechaCheckIn; } }
+        public DateTime FechaCheckOut { get { return fechaCheckOut; } }
 
-        public int CantDias { get; }
+        public int CantidadDeDias { get { return cantidadDeDias; } }
+
+        public double PrecioFinal { get { return precioFinal; } }
 
         public Propiedad Alojamiento { get{ return alojamiento; } }
         public Cliente NuevoCliente { get { return nuevoCliente; } }
