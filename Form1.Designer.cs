@@ -204,7 +204,7 @@ namespace TP_2_LAB___2
             this.btnBorrarReservas.BackColor = System.Drawing.Color.Firebrick;
             this.btnBorrarReservas.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBorrarReservas.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnBorrarReservas.Location = new System.Drawing.Point(726, 286);
+            this.btnBorrarReservas.Location = new System.Drawing.Point(699, 528);
             this.btnBorrarReservas.Name = "btnBorrarReservas";
             this.btnBorrarReservas.Size = new System.Drawing.Size(101, 39);
             this.btnBorrarReservas.TabIndex = 4;
@@ -213,7 +213,7 @@ namespace TP_2_LAB___2
             // 
             // btnModificarReservas
             // 
-            this.btnModificarReservas.Location = new System.Drawing.Point(521, 286);
+            this.btnModificarReservas.Location = new System.Drawing.Point(531, 529);
             this.btnModificarReservas.Name = "btnModificarReservas";
             this.btnModificarReservas.Size = new System.Drawing.Size(101, 39);
             this.btnModificarReservas.TabIndex = 3;
@@ -222,7 +222,7 @@ namespace TP_2_LAB___2
             // 
             // btnAltaReservas
             // 
-            this.btnAltaReservas.Location = new System.Drawing.Point(142, 3);
+            this.btnAltaReservas.Location = new System.Drawing.Point(884, 529);
             this.btnAltaReservas.Name = "btnAltaReservas";
             this.btnAltaReservas.Size = new System.Drawing.Size(101, 39);
             this.btnAltaReservas.TabIndex = 2;
@@ -232,7 +232,7 @@ namespace TP_2_LAB___2
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(1034, 287);
+            this.btnSalir.Location = new System.Drawing.Point(1044, 530);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(97, 36);
             this.btnSalir.TabIndex = 3;
@@ -244,17 +244,16 @@ namespace TP_2_LAB___2
             // 
             this.panel4.Controls.Add(this.label3);
             this.panel4.Controls.Add(this.dataGridView1);
-            this.panel4.Controls.Add(this.btnAltaReservas);
-            this.panel4.Location = new System.Drawing.Point(371, 18);
+            this.panel4.Location = new System.Drawing.Point(350, 13);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(927, 262);
+            this.panel4.Size = new System.Drawing.Size(1088, 482);
             this.panel4.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(409, 0);
+            this.label3.Location = new System.Drawing.Point(409, 10);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(142, 32);
             this.label3.TabIndex = 1;
@@ -262,6 +261,7 @@ namespace TP_2_LAB___2
             // 
             // dataGridView1
             // 
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(55)))), ((int)(((byte)(91)))));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nro,
@@ -272,11 +272,11 @@ namespace TP_2_LAB___2
             this.checkin,
             this.checkout,
             this.precio});
-            this.dataGridView1.Location = new System.Drawing.Point(3, 41);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 68);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(922, 222);
+            this.dataGridView1.Size = new System.Drawing.Size(1044, 394);
             this.dataGridView1.TabIndex = 0;
             // 
             // nro
@@ -288,6 +288,7 @@ namespace TP_2_LAB___2
             // 
             // nombre
             // 
+            this.nombre.FillWeight = 150F;
             this.nombre.HeaderText = "Nombre";
             this.nombre.MinimumWidth = 6;
             this.nombre.Name = "nombre";
@@ -305,42 +306,43 @@ namespace TP_2_LAB___2
             this.alojamiento.HeaderText = "Alojamiento";
             this.alojamiento.MinimumWidth = 6;
             this.alojamiento.Name = "alojamiento";
-            this.alojamiento.Width = 125;
+            this.alojamiento.Width = 140;
             // 
             // dias
             // 
             this.dias.HeaderText = "Dias";
             this.dias.MinimumWidth = 6;
             this.dias.Name = "dias";
-            this.dias.Width = 30;
+            this.dias.Width = 40;
             // 
             // checkin
             // 
+            this.checkin.FillWeight = 125F;
             this.checkin.HeaderText = "Check In";
             this.checkin.MinimumWidth = 6;
             this.checkin.Name = "checkin";
-            this.checkin.Width = 80;
+            this.checkin.Width = 110;
             // 
             // checkout
             // 
             this.checkout.HeaderText = "Check Out";
             this.checkout.MinimumWidth = 6;
             this.checkout.Name = "checkout";
-            this.checkout.Width = 80;
+            this.checkout.Width = 110;
             // 
             // precio
             // 
             this.precio.HeaderText = "Precio";
             this.precio.MinimumWidth = 6;
             this.precio.Name = "precio";
-            this.precio.Width = 60;
+            this.precio.Width = 95;
             // 
             // iconButton1
             // 
             this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.PepperHot;
             this.iconButton1.IconColor = System.Drawing.Color.Red;
             this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.Location = new System.Drawing.Point(925, 494);
+            this.iconButton1.Location = new System.Drawing.Point(879, 621);
             this.iconButton1.Name = "iconButton1";
             this.iconButton1.Size = new System.Drawing.Size(105, 49);
             this.iconButton1.TabIndex = 5;
@@ -363,6 +365,7 @@ namespace TP_2_LAB___2
             this.ClientSize = new System.Drawing.Size(1423, 713);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.iconButton1);
+            this.Controls.Add(this.btnAltaReservas);
             this.Controls.Add(this.btnBorrarReservas);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.btnModificarReservas);
@@ -405,6 +408,8 @@ namespace TP_2_LAB___2
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label3;
+        private FontAwesome.Sharp.IconButton iconButton1;
+        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataGridViewTextBoxColumn nro;
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn dni;
@@ -413,8 +418,6 @@ namespace TP_2_LAB___2
         private System.Windows.Forms.DataGridViewTextBoxColumn checkin;
         private System.Windows.Forms.DataGridViewTextBoxColumn checkout;
         private System.Windows.Forms.DataGridViewTextBoxColumn precio;
-        private FontAwesome.Sharp.IconButton iconButton1;
-        private System.Windows.Forms.Panel panel3;
     }
 }
 

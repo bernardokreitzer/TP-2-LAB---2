@@ -22,6 +22,7 @@ namespace TP_2_LAB___2
         public Form1()
         {
             InitializeComponent();
+           
         }
 
         Sistema miSistema;
@@ -30,6 +31,7 @@ namespace TP_2_LAB___2
         protected ArrayList alojamientos = new ArrayList();
         string miarchivo = Application.StartupPath + ("\\reservas.txt");
         FileStream miStream;
+        string foto1;
 
         private void Form1_Load(object sender, EventArgs e)
         {     // Bordes Ventana
@@ -51,6 +53,22 @@ namespace TP_2_LAB___2
             int y = (screen.WorkingArea.Height - this.Height) / 2;
             this.Location = new Point(x, y);
 
+            // Boton Redondeado
+
+            Button button = new Button();
+            button.Width = 100;
+            button.Height = 40;
+            button.Text = "Botón redondeado";
+
+            int radio = 10; // Ajusta el radio según tu preferencia
+
+            GraphicsPath path1 = new GraphicsPath();
+            path.AddEllipse(0, 0, button.Width, button.Height);
+
+            Region region = new Region(path1);
+            button.Region = region;
+
+            this.Controls.Add(button);
 
             // ----------------------------------------------------    
             //VENTANA INICIAL
@@ -105,7 +123,6 @@ namespace TP_2_LAB___2
 
             // 4.- Cerrar Stream
             miStream.Close();
-
         }
 
 
@@ -141,30 +158,49 @@ namespace TP_2_LAB___2
                 fila.Cells["Nombre"].Value = r.NuevoCliente.Nombre;
                 fila.Cells["Dni"].Value = r.NuevoCliente.Dni;
 
-                fila.Cells["Alojamiento"].Value = r.Alojamiento.Direccion;
-                fila.Cells["Dias"].Value = r.CantDias;
+                //fila.Cells["Alojamiento"].Value = r.Alojamiento.Direccion;
+                fila.Cells["Alojamiento"].Value = r.Alojamiento.TipoPropiedad;
+
+                fila.Cells["Dias"].Value = r.CantidadDeDias;
+
+                //fila.Cells["Precio"].Value = r.PrecioFinal.ToString("00,000");
+                fila.Cells["Precio"].Value = r.PrecioFinal;
+
+                fila.Cells["checkin"].Value = r.FechaCheckin.ToString("d");
+                fila.Cells["checkout"].Value = r.FechaCheckOut.ToString("d");
+
 
                 cantreservas++;
-            }
-
-            
+            }        
         }
 
         private void btnAltaAlojamiento_Click(object sender, EventArgs e)
         {
             FCargaAlojamientos vCargaAlojamiento = new FCargaAlojamientos();
+           
 
-            if (vCargaAlojamiento.ShowDialog() == DialogResult.OK)
-            {
-                string direccion = vCargaAlojamiento.tbDireccion.Text;
-                int numeroPropiedad = Convert.ToInt32(vCargaAlojamiento.tbNroPropiedad.Text);
-                string tipoAlojamiento = vCargaAlojamiento.cbTipoAlojamiento.Text;
 
-                miSistema.AgregarPropiedades(new Propiedad(direccion, numeroPropiedad, tipoAlojamiento));
-                //   alojamientos.Add();
-                CargarDatos();
+
+            try
+                {
+                if (vCargaAlojamiento.ShowDialog() == DialogResult.OK)
+                {
+                    string direccion = vCargaAlojamiento.tbDireccion.Text;
+                    int numeroPropiedad = Convert.ToInt32(vCargaAlojamiento.tbNroPropiedad.Text);
+                    string tipoAlojamiento = vCargaAlojamiento.cbTipoAlojamiento.Text;
+
+                    miSistema.AgregarPropiedades(new Propiedad(direccion, numeroPropiedad, tipoAlojamiento));
+                    CargarDatos();
+                    vCargaAlojamiento.Dispose();
+                }           
             }
-            vCargaAlojamiento.Dispose();
+                catch (FormatException) 
+                {
+                    MessageBox.Show("Debe ingresar un numero");
+                }
+               
+                //   alojamientos.Add();
+                       
         }
 
         private void Deserializar()
@@ -195,6 +231,7 @@ namespace TP_2_LAB___2
             FCargaAlojamientos fModificarAlojamiento = new FCargaAlojamientos();
             int itemSeleccionado = lBoxAlojamientos.SelectedIndex;
             int totalPropiedades = miSistema.cantLista();
+            
             try  
             {
                 fModificarAlojamiento.tbDireccion.Text = miSistema.BuscarPropiedad(itemSeleccionado).Direccion;
@@ -202,6 +239,21 @@ namespace TP_2_LAB___2
                 fModificarAlojamiento.cbTipoAlojamiento.Text = miSistema.BuscarPropiedad(itemSeleccionado).TipoPropiedad;
 
                 int numeroPropiedad;
+                // Configura la imagen para el primer PictureBox
+                //fModificarAlojamiento.pictureBox1.Image = Image.FromFile("C:/Users/Alexx/Pictures/casas/casa2.jpg");
+                //fModificarAlojamiento.pictureBox2.Image = Image.FromFile("C:/Users/Alexx/Pictures/casas/casa2.jpg");
+                //fModificarAlojamiento.pictureBox2.Image = Image.FromFile(Application.StartupPath + "\\casa2.jpg");
+
+                fModificarAlojamiento.pictureBox1.Image = Image.FromFile(Application.StartupPath + @"/alojamientos\casa2.jpg");
+                fModificarAlojamiento.pictureBox2.Image = Image.FromFile(Application.StartupPath + @"/alojamientos\casa1.jpg");
+
+                //string path = @"\myvideo.wmv";
+
+                //path = Application.StartupPath + path;
+
+
+
+                //pictureBox1.Image = Image.FromFile("imagen1.jpg");
 
                 if (fModificarAlojamiento.ShowDialog() == DialogResult.OK)
                 {
@@ -213,6 +265,22 @@ namespace TP_2_LAB___2
 
                     miSistema.ModificarPropiedad(itemSeleccionado, direccion, numeroPropiedad);
                     //alojamientos.Add(new Propiedad(direccion, numeroPropiedad));
+
+                    // Ruta de la imagen que deseas cargar
+                    string rutaDeLaImagen = Application.StartupPath + "\\casa1.jpg";
+                    try
+                    {
+                        // Cargar la imagen desde la ruta de archivo
+                        Image imagen = Image.FromFile(rutaDeLaImagen);
+
+                        // Asignar la imagen al PictureBox
+                        fModificarAlojamiento.pictureBox1.Image = imagen;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error al cargar la imagen: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    
                     CargarDatos();
                 }
             }
@@ -234,7 +302,7 @@ namespace TP_2_LAB___2
         }
 
         private void btnAltaReservas_Click(object sender, EventArgs e)
-        {
+        {           
             FAltaReservas vReservas = new FAltaReservas();
            
             foreach(Propiedad p in miSistema.ListarPropiedades())
@@ -250,6 +318,7 @@ namespace TP_2_LAB___2
 
             if (vReservas.ShowDialog() == DialogResult.OK)
             {
+                
                 DateTime fechaInicio = vReservas.dateTimePicker1.Value;
                 DateTime fechaFin = vReservas.dateTimePicker2.Value;
 
