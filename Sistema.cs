@@ -12,14 +12,13 @@ namespace TP_2_LAB___2
     {
         protected List<Reserva> reservas;
         private double precioBase;
-        private List<Cliente> clientes;
-        private ArrayList propiedades;
+        private List<Cliente> clientes; 
         private List<Propiedad> propiedades2;
+        private ArrayList propiedades;
 
         public Sistema(double precioBase)
         {
             clientes = new List<Cliente>();
-
             reservas = new List<Reserva>();
             this.precioBase = precioBase;
             propiedades = new ArrayList();
@@ -27,8 +26,7 @@ namespace TP_2_LAB___2
         }
 
         public void AgregarCliente(string nom, int dni, string direccion)
-        {
-            
+        {        
             clientes.Add(new Cliente(nom, dni, direccion));
         }
 

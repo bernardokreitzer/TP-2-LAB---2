@@ -244,7 +244,7 @@ namespace TP_2_LAB___2
             // 
             this.panel4.Controls.Add(this.label3);
             this.panel4.Controls.Add(this.dataGridView1);
-            this.panel4.Location = new System.Drawing.Point(350, 13);
+            this.panel4.Location = new System.Drawing.Point(454, 18);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1088, 482);
             this.panel4.TabIndex = 4;
@@ -278,6 +278,8 @@ namespace TP_2_LAB___2
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(1044, 394);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // nro
             // 
@@ -362,7 +364,7 @@ namespace TP_2_LAB___2
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
-            this.ClientSize = new System.Drawing.Size(1423, 713);
+            this.ClientSize = new System.Drawing.Size(1600, 713);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.iconButton1);
             this.Controls.Add(this.btnAltaReservas);

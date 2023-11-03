@@ -56,13 +56,13 @@ namespace TP_2_LAB___2
             fotos.Add(CargarFoto());
         }
 
-        private void pictureBox3_Click(object sender, EventArgs e)
-        {
-            fotoSeleccionada = CargarFoto();
-            Image imagen3 = Image.FromFile(fotoSeleccionada);
-            pictureBox3.Image = imagen3;
-            fotos.Add(fotoSeleccionada);
-        }
+        //private void pictureBox3_Click(object sender, EventArgs e)
+        //{
+        //    fotoSeleccionada = CargarFoto();
+        //    Image imagen3 = Image.FromFile(fotoSeleccionada);
+        //    pictureBox3.Image = imagen3;
+        //    fotos.Add(fotoSeleccionada);
+        //}
 
 
 
