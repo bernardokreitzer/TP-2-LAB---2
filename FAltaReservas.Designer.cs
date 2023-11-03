@@ -32,6 +32,8 @@ namespace TP_2_LAB___2
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbListaClientes = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.cbAlojamientos = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -47,8 +49,6 @@ namespace TP_2_LAB___2
             this.label1 = new System.Windows.Forms.Label();
             this.btnAltaAlojamiento = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.cbListaClientes = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -82,10 +82,28 @@ namespace TP_2_LAB___2
             this.groupBox1.Controls.Add(this.dateTimePicker2);
             this.groupBox1.Location = new System.Drawing.Point(12, 29);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(676, 306);
+            this.groupBox1.Size = new System.Drawing.Size(676, 355);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
+            // 
+            // cbListaClientes
+            // 
+            this.cbListaClientes.FormattingEnabled = true;
+            this.cbListaClientes.Location = new System.Drawing.Point(435, 155);
+            this.cbListaClientes.Name = "cbListaClientes";
+            this.cbListaClientes.Size = new System.Drawing.Size(214, 24);
+            this.cbListaClientes.TabIndex = 12;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(441, 118);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(152, 20);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Lista de Clientes";
             // 
             // label6
             // 
@@ -236,7 +254,7 @@ namespace TP_2_LAB___2
             // btnAltaAlojamiento
             // 
             this.btnAltaAlojamiento.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnAltaAlojamiento.Location = new System.Drawing.Point(94, 369);
+            this.btnAltaAlojamiento.Location = new System.Drawing.Point(94, 390);
             this.btnAltaAlojamiento.Name = "btnAltaAlojamiento";
             this.btnAltaAlojamiento.Size = new System.Drawing.Size(101, 39);
             this.btnAltaAlojamiento.TabIndex = 3;
@@ -246,30 +264,12 @@ namespace TP_2_LAB___2
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.Location = new System.Drawing.Point(322, 369);
+            this.button1.Location = new System.Drawing.Point(322, 390);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(101, 39);
             this.button1.TabIndex = 4;
             this.button1.Text = "Cancelar";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(441, 140);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(152, 20);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Lista de Clientes";
-            // 
-            // cbListaClientes
-            // 
-            this.cbListaClientes.FormattingEnabled = true;
-            this.cbListaClientes.Location = new System.Drawing.Point(435, 177);
-            this.cbListaClientes.Name = "cbListaClientes";
-            this.cbListaClientes.Size = new System.Drawing.Size(214, 24);
-            this.cbListaClientes.TabIndex = 12;
             // 
             // FAltaReservas
             // 

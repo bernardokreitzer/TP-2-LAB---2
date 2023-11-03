@@ -111,7 +111,6 @@ namespace TP_2_LAB___2
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {     // Proceso De Serializar
-
             // 1. Crear Stream
              miStream = new FileStream(miarchivo, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
 
@@ -314,12 +313,26 @@ namespace TP_2_LAB___2
                 vReservas.cbListaClientes.Items.Add(c.Nombre);
             }
 
-           // vReservas.cbAlojamientos.Items.AddRange(datos);
+            // vReservas.cbAlojamientos.Items.AddRange(datos);
+            // Obtener la fecha actual
+            DateTime fechaInicio = DateTime.Now;
+
+            // Calcular la fecha máxima como un año en el futuro
+            DateTime fechaMaxima = fechaInicio.AddMonths(3);
+
+            // Establecer las propiedades MinDate y MaxDate del DateTimePicker
+            vReservas.dateTimePicker1.MinDate = fechaInicio;
+            vReservas.dateTimePicker1.MaxDate = fechaMaxima;
+
+            vReservas.dateTimePicker2.MaxDate = fechaMaxima;
+            vReservas.dateTimePicker2.MinDate = fechaInicio;
+
 
             if (vReservas.ShowDialog() == DialogResult.OK)
             {
                 
-                DateTime fechaInicio = vReservas.dateTimePicker1.Value;
+
+               // DateTime fechaInicio = vReservas.dateTimePicker1.Value;
                 DateTime fechaFin = vReservas.dateTimePicker2.Value;
 
                 TimeSpan diferencia = fechaFin - fechaInicio;
@@ -405,6 +418,61 @@ namespace TP_2_LAB___2
             this.Close();
         }
 
-        
+        //private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    // Verifica si se hizo doble clic en una celda válida
+        //    if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+        //    {
+        //        // Obtiene la fila completa que se hizo doble clic
+        //        DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+
+        //           FAltaReservas vmodificarReservas = new FAltaReservas();
+        //          vmodificarReservas.ShowDialog();
+
+        //        // Puedes modificar las celdas de la fila, por ejemplo:
+        //        row.Cells[0].Value = "Nuevo Valor para la Celda 0";
+        //        row.Cells[1].Value = "Nuevo Valor para la Celda 1";
+        //        // ... y así sucesivamente
+        //    }
+        //}
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //// Verifica si se hizo clic en una celda válida
+            //if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            //{
+            //    // Obtén la fila completa que se hizo clic
+            //    DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+
+            //    // Selecciona la fila
+            //    row.Selected = true;
+            //}
+
+            //FAltaReservas vmodificarReservas = new FAltaReservas();
+            //vmodificarReservas.ShowDialog();
+
+            //if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            //{
+            //    // Obtiene la fila completa que se hizo clic
+            //    DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+
+            //    // Puedes modificar las celdas de la fila, por ejemplo:
+            //    row.Cells[0].Value = "Nuevo Valor para la Celda 0";
+            //    row.Cells[1].Value = "Nuevo Valor para la Celda 1";
+            //    // ... y así sucesivamente
+            //}
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                // Obtén la fila completa que se hizo clic
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+
+                // Selecciona la fila
+                row.Selected = true;
+            }
+        }
     }
 }
