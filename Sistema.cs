@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,16 +14,14 @@ namespace TP_2_LAB___2
         protected List<Reserva> reservas;
         private double precioBase;
         private List<Cliente> clientes; 
-        private List<Propiedad> propiedades2;
-        private ArrayList propiedades;
+        private List<Propiedad> propiedades;
 
         public Sistema(double precioBase)
         {
             clientes = new List<Cliente>();
             reservas = new List<Reserva>();
             this.precioBase = precioBase;
-            propiedades = new ArrayList();
-            propiedades2 = new List<Propiedad>();
+            propiedades = new List<Propiedad>();
         }
 
         public void AgregarCliente(string nom, int dni, string direccion)
@@ -42,29 +41,29 @@ namespace TP_2_LAB___2
 
         public void  ModificarPropiedad(int indice, string direccion, int numeroPropiedad )
         {
-            propiedades2[indice].Direccion = direccion;
-            propiedades2[indice].Numero = numeroPropiedad;
+            propiedades[indice].Direccion = direccion;
+            propiedades[indice].Numero = numeroPropiedad;
             
-                }
+        }
 
         public int cantLista()
         {
-            return propiedades2.Count;
+            return propiedades.Count;
         }
 
         public Propiedad BuscarPropiedad(int indice)
         {
-            return propiedades2[indice];
+            return propiedades[indice];
         }
 
         public void AgregarPropiedades(Propiedad unaPropiedad)
         {
-            propiedades2.Add(unaPropiedad);
+            propiedades.Add(unaPropiedad);
         }
 
         public List<Propiedad> ListarPropiedades()
         {
-            return propiedades2;
+            return propiedades;
         }
 
         public List<Reserva> ListarReservas()
@@ -74,18 +73,12 @@ namespace TP_2_LAB___2
 
         public void BorrarPropiedad(int indice)
         {
-            propiedades2.RemoveAt(indice);
+            propiedades.RemoveAt(indice);
         }
 
-
-        //public  Propiedad  ListarPropiedades
-        //{
-        //     get {return propiedades; }
-        //}
-
-        public void AgregarReserva(DateTime fechaInicio, DateTime fechaFin, int totDias, Propiedad alojamiento, Cliente unCliente)
+        public void AgregarReserva(DateTime fechaInicio, int totDias, Propiedad alojamiento, Cliente unCliente)
         {
-            reservas.Add(new Reserva(fechaInicio, fechaFin, alojamiento, unCliente));
+            reservas.Add(new Reserva(fechaInicio, totDias, alojamiento, unCliente));
         }
 
         public void ModificarReserva()
@@ -98,6 +91,33 @@ namespace TP_2_LAB___2
 
         }
 
-
+        public void ImportarReservas(string ruta)
+        {
+            FileStream archivo = null;
+            StreamReader sr = null;
+            string renglon;
+            string[] datos;
+            try
+            {
+                archivo = new FileStream(ruta, FileMode.Open, FileAccess.Read);
+                sr = new StreamReader(archivo);
+                while (!sr.EndOfStream)
+                {
+                    renglon = sr.ReadLine();
+                    datos = renglon.Split(';');
+                    //Procesar los datos
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al importar reservas: " + ex.Message);
+            }
+            finally
+            {
+                if (sr != null) sr.Close();
+                if (archivo != null) archivo.Close();
+            }
+            
+        }
     }
 }

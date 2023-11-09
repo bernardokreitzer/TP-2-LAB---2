@@ -18,20 +18,21 @@ namespace TP_2_LAB___2
 {
     public partial class Form1 : Form
     {
-
         public Form1()
         {
             InitializeComponent();
-           
         }
 
         Sistema miSistema;
         Propiedad nuevoAlojamiento;
         double precioBase;
         protected ArrayList alojamientos = new ArrayList();
+        string pathDatos = Application.StartupPath + ("\\datos.dat");
         string miarchivo = Application.StartupPath + ("\\reservas.txt");
         FileStream miStream;
         string foto1;
+
+        Calendario calendar; //Chequear si esto va acá
 
         private void Form1_Load(object sender, EventArgs e)
         {     // Bordes Ventana
@@ -91,40 +92,62 @@ namespace TP_2_LAB___2
 
             //  alojamientos.Add(new Propiedad("San Juan 555", 30));
 
-            //  Deserializar();
-            // 1. Crear Stream
-            miStream = new FileStream(miarchivo, FileMode.Open, FileAccess.Read, FileShare.None);
+            //  Deserializar
+            if (File.Exists(pathDatos))
+            {
+                // 1. Crear Stream
+                miStream = new FileStream(pathDatos, FileMode.Open, FileAccess.Read, FileShare.None);
 
-            // 2.- Crear Formateador
-            BinaryFormatter formateador = new BinaryFormatter();
+                // 2.- Crear Formateador
+                BinaryFormatter formateador = new BinaryFormatter();
 
-            // 3.- Serialiar
-            miSistema = (Sistema)formateador.Deserialize(miStream);
-            //laAgenda = (agenda)serUnser.Deserialize(archivo);
+                // 3.- Serialiar
+                miSistema = (Sistema)formateador.Deserialize(miStream);
 
-            // 4.- Cerrar Stream
-            miStream.Close();
+                // 4.- Cerrar Stream
+                miStream.Close();
 
-            CargarDatos();
+                CargarDatos();
+            }
+            else
+            {
+                //VENTANA INICIAL
+                FPrecioBase vPrecioBase = new FPrecioBase();
+                if (vPrecioBase.ShowDialog() == DialogResult.OK)
+                {
+                    precioBase = Convert.ToDouble(vPrecioBase.tbPrecioBase.Text);
+                    miSistema = new Sistema(precioBase);
+                    MessageBox.Show($"Precio base: {precioBase} ingresado correctamente");
+                }
+                else
+                {
+                    MessageBox.Show("Cancelado por usuario");
+                }
+                vPrecioBase.Dispose();
+            }
         }
-
-
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {     // Proceso De Serializar
+        {     // Proceso Para Serializar
             // 1. Crear Stream
-             miStream = new FileStream(miarchivo, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
+            miStream = new FileStream(pathDatos, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
+            try
+            {
+                // 2.- Crear Formateador
+                BinaryFormatter formateador = new BinaryFormatter();
 
-            // 2.- Crear Formateador
-            BinaryFormatter formateador = new BinaryFormatter();
-
-            // 3.- Serialiar
-            formateador.Serialize(miStream, miSistema);
-
-            // 4.- Cerrar Stream
-            miStream.Close();
+                // 3.- Serialiar
+                formateador.Serialize(miStream, miSistema);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                // 4.- Cerrar Stream
+                if (miStream != null) miStream.Close();
+            }
         }
-
-
         private void CargarDatos() 
         {
             lBoxAlojamientos.Items.Clear();
@@ -176,12 +199,9 @@ namespace TP_2_LAB___2
         private void btnAltaAlojamiento_Click(object sender, EventArgs e)
         {
             FCargaAlojamientos vCargaAlojamiento = new FCargaAlojamientos();
-           
-
-
 
             try
-                {
+            {
                 if (vCargaAlojamiento.ShowDialog() == DialogResult.OK)
                 {
                     string direccion = vCargaAlojamiento.tbDireccion.Text;
@@ -193,37 +213,13 @@ namespace TP_2_LAB___2
                     vCargaAlojamiento.Dispose();
                 }           
             }
-                catch (FormatException) 
-                {
-                    MessageBox.Show("Debe ingresar un numero");
-                }
+            catch (FormatException) 
+            {
+                MessageBox.Show("Debe ingresar un numero");
+            }
                
                 //   alojamientos.Add();
-                       
         }
-
-        private void Deserializar()
-        {
-            
-        }
-
-        private void Serializar()
-        {
-            // Proceso Serializar
-
-            // 1. Crear Stream
-            FileStream miStream = new FileStream("C:/Users/alexx/Documents/alojamientos.dat", FileMode.Create, FileAccess.Write, FileShare.None);
-
-            // 2.- Crear Formateador
-            BinaryFormatter formateador = new BinaryFormatter();
-
-            // 3.- Serialiar
-            formateador.Serialize(miStream, miSistema);
-            
-            // 4.- Cerrar Stream
-            miStream.Close();
-        }
-
   
         private void btnModificar_Click(object sender, EventArgs e)
         {
@@ -243,8 +239,8 @@ namespace TP_2_LAB___2
                 //fModificarAlojamiento.pictureBox2.Image = Image.FromFile("C:/Users/Alexx/Pictures/casas/casa2.jpg");
                 //fModificarAlojamiento.pictureBox2.Image = Image.FromFile(Application.StartupPath + "\\casa2.jpg");
 
-                fModificarAlojamiento.pictureBox1.Image = Image.FromFile(Application.StartupPath + @"/alojamientos\casa2.jpg");
-                fModificarAlojamiento.pictureBox2.Image = Image.FromFile(Application.StartupPath + @"/alojamientos\casa1.jpg");
+                fModificarAlojamiento.pictureBox1.Image = Image.FromFile(Application.StartupPath + @"\Alojamientos\casa2.jpg");
+                fModificarAlojamiento.pictureBox2.Image = Image.FromFile(Application.StartupPath + @"\Aalojamientos\casa1.jpg");
 
                 //string path = @"\myvideo.wmv";
 
@@ -303,8 +299,35 @@ namespace TP_2_LAB___2
         private void btnAltaReservas_Click(object sender, EventArgs e)
         {           
             FAltaReservas vReservas = new FAltaReservas();
-           
-            foreach(Propiedad p in miSistema.ListarPropiedades())
+
+            #region Formatear Calendario
+            int filas = 16;
+            int columnas = 7;
+            int[,] dias;
+            
+            //lbMes.Text = DateTime.Now.ToString("MMMM");
+            int largo = columnas * 25;
+            int alto = filas * 20;
+            vReservas.dgvCalendario.Width = largo + 3;
+            vReservas.dgvCalendario.Height = alto + 3;
+            vReservas.dgvCalendario.ColumnCount = columnas;
+            vReservas.dgvCalendario.RowCount = filas;
+            for (int i = 0; i < columnas; i++) { vReservas.dgvCalendario.Columns[i].Width = 25; }
+            for (int i = 0; i < filas; i++) { vReservas.dgvCalendario.Rows[i].Height = 20; }
+            vReservas.dgvCalendario[0, 0].Value = "D";
+            vReservas.dgvCalendario[1, 0].Value = "L";
+            vReservas.dgvCalendario[2, 0].Value = "M";
+            vReservas.dgvCalendario[3, 0].Value = "M";
+            vReservas.dgvCalendario[4, 0].Value = "J";
+            vReservas.dgvCalendario[5, 0].Value = "V";
+            vReservas.dgvCalendario[6, 0].Value = "S";
+
+            calendar = new Calendario(DateTime.Now.Month, DateTime.Now.Year);
+            dias = calendar.Dias;
+            mostrarCalendario();
+            #endregion
+
+            foreach (Propiedad p in miSistema.ListarPropiedades())
             {
                 vReservas.cbAlojamientos.Items.Add(p.Direccion);
             }
@@ -315,48 +338,128 @@ namespace TP_2_LAB___2
 
             // vReservas.cbAlojamientos.Items.AddRange(datos);
             // Obtener la fecha actual
-            DateTime fechaInicio = DateTime.Now;
+            DateTime fechaReserva = DateTime.Now;
 
-            // Calcular la fecha máxima como un año en el futuro
-            DateTime fechaMaxima = fechaInicio.AddMonths(3);
+            // Calcular la fecha máxima como 3 meses en el futuro
+            DateTime fechaMaxima = fechaReserva.AddMonths(3);
 
             // Establecer las propiedades MinDate y MaxDate del DateTimePicker
-            vReservas.dateTimePicker1.MinDate = fechaInicio;
-            vReservas.dateTimePicker1.MaxDate = fechaMaxima;
+            vReservas.dateTimePicker1.MinDate = fechaReserva;
+            vReservas.dateTimePicker1.MaxDate = new DateTime(fechaMaxima.Year, fechaMaxima.Month, 1).AddDays(-1);
 
-            vReservas.dateTimePicker2.MaxDate = fechaMaxima;
-            vReservas.dateTimePicker2.MinDate = fechaInicio;
+            int dia, mes, año;
+            int cantidadDias;
 
+            bool reservado = false;
+            DialogResult dr;
 
-            if (vReservas.ShowDialog() == DialogResult.OK)
+            do
             {
                 
+                dr = vReservas.ShowDialog();
 
-               // DateTime fechaInicio = vReservas.dateTimePicker1.Value;
-                DateTime fechaFin = vReservas.dateTimePicker2.Value;
+                DateTime fechaInicio = vReservas.dateTimePicker1.Value;
+                dia = vReservas.dateTimePicker1.Value.Day;
+                mes = vReservas.dateTimePicker1.Value.Month;
+                año = vReservas.dateTimePicker1.Value.Year;
+                if (año > DateTime.Now.Year) mes += 12;
+                cantidadDias = Convert.ToInt16(vReservas.nudCantDias.Value);
+                DateTime fechaFin = fechaInicio.AddDays(cantidadDias);
 
-                TimeSpan diferencia = fechaFin - fechaInicio;
-                int diasDiferencia = diferencia.Days;
                 int alojamientoSeleccionadoindice = vReservas.cbAlojamientos.SelectedIndex;
                 Propiedad alojamientoSeleccionado = miSistema.BuscarPropiedad(alojamientoSeleccionadoindice);
 
                 int indiceclienteSeleccionado = vReservas.cbListaClientes.SelectedIndex;
                 Cliente clienteSeleccionado = miSistema.BuscarCliente(indiceclienteSeleccionado);
-                MessageBox.Show($"Fecha de inicio: {fechaInicio}\nFecha de fin: {fechaFin}\n Total Dias: { diasDiferencia}\n Lugar: {alojamientoSeleccionado.Direccion}");
 
-                miSistema.AgregarReserva(fechaInicio, fechaFin, diasDiferencia, alojamientoSeleccionado, clienteSeleccionado);
+                switch (dr)
+                {
+                    case DialogResult.Retry:
+                        
+                        bool correcto = calendar.Reservar(dia, mes, cantidadDias);
+                        if (correcto)
+                        {
+                            MessageBox.Show("Se reservo con exito");
+                            mostrarCalendario();
+                            reservado = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Fecha no disponible");
+                            reservado = false;
+                        }
+                        if (reservado) miSistema.AgregarReserva(fechaInicio, cantidadDias, alojamientoSeleccionado, clienteSeleccionado);
+                        break;
 
-                CargarDatos();
+                    case DialogResult.OK:
+                        if (reservado)
+                        {
+                            CargarDatos();
+                            MessageBox.Show($"Fecha de inicio: {fechaReserva:dddd, dd 'de'MMMM 'de' yyyy}\nFecha de fin: {fechaFin:dddd, dd 'de'MMMM 'de' yyyy}\nTotal Dias: {cantidadDias}\nLugar: {alojamientoSeleccionado.Direccion}");
+                        }
+                        else MessageBox.Show("Debe reservar primero");
+                        break;
 
+                }
+            } while (dr != DialogResult.Cancel);
+            vReservas.Dispose();
 
-                //int cantreservas = 1;
-                //lbReservas.Items.Clear();
-                //foreach(Reserva r in miSistema.ListarReservas())
-                //{                
-                //    lbReservas.Items.Add(cantreservas.ToString("00") + " " + r.NuevoCliente.Nombre +  " " + r.Alojamiento.Direccion +  " - Reservado: " +  r.FechaCheckin.ToString("dd-MM-yyyy"));
-                //    //lbReservas.Items.Add(r.FechaCheckin.ToString("dddd", new CultureInfo("es-ES")));
-                //    cantreservas++;
-                //}           
+            //Antes de modificar
+            //if (vReservas.ShowDialog() == DialogResult.OK)
+            //{
+            //    DateTime fechaInicio = vReservas.dateTimePicker1.Value;
+            //    dia = vReservas.dateTimePicker1.Value.Day;
+            //    mes = vReservas.dateTimePicker1.Value.Month;
+            //    año = vReservas.dateTimePicker1.Value.Year;
+            //    if(año > DateTime.Now.Year) mes += 12;
+            //    cantidadDias = Convert.ToInt16(vReservas.nudCantDias.Value);
+            //    DateTime fechaFin = fechaInicio.AddDays(cantidadDias);
+
+            //    int alojamientoSeleccionadoindice = vReservas.cbAlojamientos.SelectedIndex;
+            //    Propiedad alojamientoSeleccionado = miSistema.BuscarPropiedad(alojamientoSeleccionadoindice);
+
+            //    int indiceclienteSeleccionado = vReservas.cbListaClientes.SelectedIndex;
+            //    Cliente clienteSeleccionado = miSistema.BuscarCliente(indiceclienteSeleccionado);
+
+            //    bool correcto = calendar.Reservar(dia, mes, cantidadDias);
+            //    if (correcto)
+            //    {
+            //        MessageBox.Show("Se reservo con exito");
+            //        mostrarCalendario();
+            //    }
+            //    else MessageBox.Show("Fecha no disponible");
+
+            //    miSistema.AgregarReserva(fechaInicio, cantidadDias, alojamientoSeleccionado, clienteSeleccionado);
+            //    MessageBox.Show($"Fecha de inicio: {fechaReserva:dddd, dd 'de'MMMM 'de' yyyy}\nFecha de fin: {fechaFin:dddd, dd 'de'MMMM 'de' yyyy}\nTotal Dias: {cantidadDias}\nLugar: {alojamientoSeleccionado.Direccion}");
+
+            //    CargarDatos();
+            //}
+            //else MessageBox.Show("Cancelado por el usuario");
+            //vReservas.Dispose();
+
+            void mostrarCalendario()
+            {
+                int mesReserva = DateTime.Now.Month;
+
+                int c;
+                int f;
+                for (int d = 0; d < dias.GetLength(0); d++)
+                {
+                    c = d % columnas;
+                    f = 1 + (d / columnas);
+                    if (dias[d, 0] != 0)
+                    {
+                        vReservas.dgvCalendario[c, f].Value = dias[d, 0].ToString("00");
+                        if (dias[d, 1] != 0)
+                            vReservas.dgvCalendario[c, f].Style.BackColor = Color.Red;
+                        else
+                        {
+                            if (dias[d, 1] == 0 && dias[d, 2] == mesReserva) vReservas.dgvCalendario[c, f].Style.BackColor = Color.Aquamarine;
+                            if (dias[d, 1] == 0 && dias[d, 2] == mesReserva + 1) vReservas.dgvCalendario[c, f].Style.BackColor = Color.Aqua;
+                            if (dias[d, 1] == 0 && dias[d, 2] == mesReserva + 2) vReservas.dgvCalendario[c, f].Style.BackColor = Color.DarkCyan;
+                        }
+                    }
+                }
             }
         }
 
@@ -472,6 +575,31 @@ namespace TP_2_LAB___2
 
                 // Selecciona la fila
                 row.Selected = true;
+            }
+        }
+
+        private void btnImportar_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                //string ruta = openFileDialog1.FileName;
+                //string[] lineas = File.ReadAllLines(ruta);
+                //foreach (string linea in lineas)
+                //{
+                //    string[] columnas = linea.Split(';');
+                //    dataGridView1.Rows.Add(columnas);
+                //}
+                string ruta = openFileDialog1.FileName;
+                try
+                {
+                    miSistema.ImportarReservas(ruta);
+                    CargarDatos();
+                }
+                catch ( Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                
             }
         }
     }

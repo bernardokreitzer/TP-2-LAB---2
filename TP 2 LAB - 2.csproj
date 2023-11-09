@@ -53,6 +53,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calendario.cs" />
     <Compile Include="CasaFindeSemana.cs" />
     <Compile Include="CasaPorDia.cs" />
     <Compile Include="Cliente.cs" />

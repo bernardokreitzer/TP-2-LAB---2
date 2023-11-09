@@ -16,8 +16,8 @@ namespace TP_2_LAB___2
         private int numeroPropiedad;
         protected double precioBase;
         protected string tipoPropiedad;
-        private bool wifi;
-        private bool ac;
+        private enum tipoServicio { Cochera, Pileta, WIFI, Limpieza, Desayuno, Mascotas };
+        private bool[] servicios;
         private List<string> fotos;
 
         public Propiedad(string dir, int numero, string propiedad)

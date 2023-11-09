@@ -58,6 +58,10 @@ namespace TP_2_LAB___2
             this.precio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnImportar = new System.Windows.Forms.Button();
+            this.btnExportar = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -128,7 +132,7 @@ namespace TP_2_LAB___2
             this.labAlojamiento.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labAlojamiento.Location = new System.Drawing.Point(58, 7);
             this.labAlojamiento.Name = "labAlojamiento";
-            this.labAlojamiento.Size = new System.Drawing.Size(177, 32);
+            this.labAlojamiento.Size = new System.Drawing.Size(176, 32);
             this.labAlojamiento.TabIndex = 0;
             this.labAlojamiento.Text = "Alojamiento";
             // 
@@ -195,7 +199,7 @@ namespace TP_2_LAB___2
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(133, 7);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(127, 32);
+            this.label1.Size = new System.Drawing.Size(126, 32);
             this.label1.TabIndex = 0;
             this.label1.Text = "Clientes";
             // 
@@ -224,7 +228,7 @@ namespace TP_2_LAB___2
             // 
             this.btnAltaReservas.Location = new System.Drawing.Point(884, 529);
             this.btnAltaReservas.Name = "btnAltaReservas";
-            this.btnAltaReservas.Size = new System.Drawing.Size(101, 39);
+            this.btnAltaReservas.Size = new System.Drawing.Size(120, 39);
             this.btnAltaReservas.TabIndex = 2;
             this.btnAltaReservas.Text = "Dar de Alta";
             this.btnAltaReservas.UseVisualStyleBackColor = true;
@@ -255,7 +259,7 @@ namespace TP_2_LAB___2
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(409, 10);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(142, 32);
+            this.label3.Size = new System.Drawing.Size(141, 32);
             this.label3.TabIndex = 1;
             this.label3.Text = "Reservas";
             // 
@@ -359,12 +363,37 @@ namespace TP_2_LAB___2
             this.panel3.Size = new System.Drawing.Size(344, 702);
             this.panel3.TabIndex = 6;
             // 
+            // btnImportar
+            // 
+            this.btnImportar.Location = new System.Drawing.Point(531, 626);
+            this.btnImportar.Name = "btnImportar";
+            this.btnImportar.Size = new System.Drawing.Size(101, 39);
+            this.btnImportar.TabIndex = 7;
+            this.btnImportar.Text = "Importar";
+            this.btnImportar.UseVisualStyleBackColor = true;
+            this.btnImportar.Click += new System.EventHandler(this.btnImportar_Click);
+            // 
+            // btnExportar
+            // 
+            this.btnExportar.Location = new System.Drawing.Point(655, 626);
+            this.btnExportar.Name = "btnExportar";
+            this.btnExportar.Size = new System.Drawing.Size(101, 39);
+            this.btnExportar.TabIndex = 8;
+            this.btnExportar.Text = "Exportar";
+            this.btnExportar.UseVisualStyleBackColor = true;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(1600, 713);
+            this.Controls.Add(this.btnExportar);
+            this.Controls.Add(this.btnImportar);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.iconButton1);
             this.Controls.Add(this.btnAltaReservas);
@@ -420,6 +449,10 @@ namespace TP_2_LAB___2
         private System.Windows.Forms.DataGridViewTextBoxColumn checkin;
         private System.Windows.Forms.DataGridViewTextBoxColumn checkout;
         private System.Windows.Forms.DataGridViewTextBoxColumn precio;
+        private System.Windows.Forms.Button btnImportar;
+        private System.Windows.Forms.Button btnExportar;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

@@ -25,17 +25,14 @@ namespace TP_2_LAB___2
         private double precioFinal;
         private int plazas;
 
-        public Reserva (DateTime checkIn, DateTime checkOut, Propiedad alojamiento, Cliente unCliente)
+        public Reserva (DateTime checkIn, int cantidad, Propiedad alojamiento, Cliente unCliente)
         {
             fechaReserva = DateTime.Now.Date;
             fechaCheckIn = checkIn;
-            fechaCheckOut = checkOut;
-            TimeSpan diasDiferencia = fechaCheckOut - fechaCheckIn;
-            cantidadDeDias = diasDiferencia.Days;
-            precioFinal = cantidadDeDias * 300;
+            cantidadDeDias = cantidad;
+            fechaCheckOut = fechaCheckIn.AddDays(cantidadDeDias);
             
-            //TimeSpan diferencia = fechaFin - fechaInicio;
-
+            precioFinal = cantidadDeDias * 300;
 
             this.alojamiento = alojamiento;
             nuevoCliente = unCliente;

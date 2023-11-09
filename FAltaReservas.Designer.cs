@@ -30,8 +30,8 @@ namespace TP_2_LAB___2
         private void InitializeComponent()
         {
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.nudCantDias = new System.Windows.Forms.NumericUpDown();
             this.cbListaClientes = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -49,8 +49,12 @@ namespace TP_2_LAB___2
             this.label1 = new System.Windows.Forms.Label();
             this.btnAltaAlojamiento = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.dgvCalendario = new System.Windows.Forms.DataGridView();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCantDias)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCalendario)).BeginInit();
             this.SuspendLayout();
             // 
             // dateTimePicker1
@@ -60,15 +64,10 @@ namespace TP_2_LAB___2
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
             this.dateTimePicker1.TabIndex = 0;
             // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(168, 78);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 22);
-            this.dateTimePicker2.TabIndex = 1;
-            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button2);
+            this.groupBox1.Controls.Add(this.nudCantDias);
             this.groupBox1.Controls.Add(this.cbListaClientes);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label6);
@@ -79,13 +78,19 @@ namespace TP_2_LAB___2
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.dateTimePicker1);
-            this.groupBox1.Controls.Add(this.dateTimePicker2);
             this.groupBox1.Location = new System.Drawing.Point(12, 29);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(676, 355);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
+            // 
+            // nudCantDias
+            // 
+            this.nudCantDias.Location = new System.Drawing.Point(248, 76);
+            this.nudCantDias.Name = "nudCantDias";
+            this.nudCantDias.Size = new System.Drawing.Size(120, 22);
+            this.nudCantDias.TabIndex = 13;
             // 
             // cbListaClientes
             // 
@@ -148,7 +153,7 @@ namespace TP_2_LAB___2
             this.cbCochera.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbCochera.Location = new System.Drawing.Point(219, 58);
             this.cbCochera.Name = "cbCochera";
-            this.cbCochera.Size = new System.Drawing.Size(90, 21);
+            this.cbCochera.Size = new System.Drawing.Size(87, 20);
             this.cbCochera.TabIndex = 13;
             this.cbCochera.Text = "Cochera";
             this.cbCochera.UseVisualStyleBackColor = true;
@@ -160,7 +165,7 @@ namespace TP_2_LAB___2
             this.checkBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox4.Location = new System.Drawing.Point(136, 85);
             this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(55, 21);
+            this.checkBox4.Size = new System.Drawing.Size(53, 20);
             this.checkBox4.TabIndex = 12;
             this.checkBox4.Text = "A C";
             this.checkBox4.UseVisualStyleBackColor = true;
@@ -172,7 +177,7 @@ namespace TP_2_LAB___2
             this.checkBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox3.Location = new System.Drawing.Point(136, 58);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(66, 21);
+            this.checkBox3.Size = new System.Drawing.Size(64, 20);
             this.checkBox3.TabIndex = 11;
             this.checkBox3.Text = "Wi Fi";
             this.checkBox3.UseVisualStyleBackColor = true;
@@ -184,7 +189,7 @@ namespace TP_2_LAB___2
             this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox2.Location = new System.Drawing.Point(30, 86);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(82, 21);
+            this.checkBox2.Size = new System.Drawing.Size(80, 20);
             this.checkBox2.TabIndex = 10;
             this.checkBox2.Text = "Piscina";
             this.checkBox2.UseVisualStyleBackColor = true;
@@ -196,7 +201,7 @@ namespace TP_2_LAB___2
             this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox1.Location = new System.Drawing.Point(28, 58);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(102, 21);
+            this.checkBox1.Size = new System.Drawing.Size(99, 20);
             this.checkBox1.TabIndex = 9;
             this.checkBox1.Text = "Desayuno";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -237,9 +242,9 @@ namespace TP_2_LAB___2
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(40, 78);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 20);
+            this.label2.Size = new System.Drawing.Size(150, 20);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Check Out";
+            this.label2.Text = "Cantidad de días";
             // 
             // label1
             // 
@@ -256,9 +261,9 @@ namespace TP_2_LAB___2
             this.btnAltaAlojamiento.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnAltaAlojamiento.Location = new System.Drawing.Point(94, 390);
             this.btnAltaAlojamiento.Name = "btnAltaAlojamiento";
-            this.btnAltaAlojamiento.Size = new System.Drawing.Size(101, 39);
+            this.btnAltaAlojamiento.Size = new System.Drawing.Size(122, 39);
             this.btnAltaAlojamiento.TabIndex = 3;
-            this.btnAltaAlojamiento.Text = "Aceptar";
+            this.btnAltaAlojamiento.Text = "Confirmar";
             this.btnAltaAlojamiento.UseVisualStyleBackColor = true;
             // 
             // button1
@@ -268,14 +273,42 @@ namespace TP_2_LAB___2
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(101, 39);
             this.button1.TabIndex = 4;
-            this.button1.Text = "Cancelar";
+            this.button1.Text = "Salir";
             this.button1.UseVisualStyleBackColor = true;
+            // 
+            // dgvCalendario
+            // 
+            this.dgvCalendario.AllowUserToResizeColumns = false;
+            this.dgvCalendario.AllowUserToResizeRows = false;
+            this.dgvCalendario.ColumnHeadersHeight = 29;
+            this.dgvCalendario.ColumnHeadersVisible = false;
+            this.dgvCalendario.Location = new System.Drawing.Point(813, 42);
+            this.dgvCalendario.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvCalendario.Name = "dgvCalendario";
+            this.dgvCalendario.ReadOnly = true;
+            this.dgvCalendario.RowHeadersVisible = false;
+            this.dgvCalendario.RowHeadersWidth = 5;
+            this.dgvCalendario.RowTemplate.Height = 24;
+            this.dgvCalendario.ShowEditingIcon = false;
+            this.dgvCalendario.Size = new System.Drawing.Size(287, 166);
+            this.dgvCalendario.TabIndex = 5;
+            // 
+            // button2
+            // 
+            this.button2.DialogResult = System.Windows.Forms.DialogResult.Retry;
+            this.button2.Location = new System.Drawing.Point(504, 283);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(128, 38);
+            this.button2.TabIndex = 14;
+            this.button2.Text = "Reservar";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // FAltaReservas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1156, 450);
+            this.Controls.Add(this.dgvCalendario);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnAltaAlojamiento);
             this.Controls.Add(this.groupBox1);
@@ -283,8 +316,10 @@ namespace TP_2_LAB___2
             this.Text = "FAltaReservas";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCantDias)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCalendario)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -303,12 +338,14 @@ namespace TP_2_LAB___2
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         public System.Windows.Forms.DateTimePicker dateTimePicker1;
-        public System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Button btnAltaAlojamiento;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label6;
         public System.Windows.Forms.ComboBox cbAlojamientos;
         public System.Windows.Forms.ComboBox cbListaClientes;
         private System.Windows.Forms.Label label7;
+        public System.Windows.Forms.NumericUpDown nudCantDias;
+        public System.Windows.Forms.DataGridView dgvCalendario;
+        private System.Windows.Forms.Button button2;
     }
 }
