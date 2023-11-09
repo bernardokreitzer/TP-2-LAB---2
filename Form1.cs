@@ -102,12 +102,20 @@ namespace TP_2_LAB___2
                 BinaryFormatter formateador = new BinaryFormatter();
 
                 // 3.- Serialiar
-                miSistema = (Sistema)formateador.Deserialize(miStream);
-
-                // 4.- Cerrar Stream
-                miStream.Close();
-
-                CargarDatos();
+                try
+                {
+                    miSistema = (Sistema)formateador.Deserialize(miStream);
+                    CargarDatos();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    // 4.- Cerrar Stream
+                    miStream.Close();
+                }
             }
             else
             {
@@ -208,7 +216,21 @@ namespace TP_2_LAB___2
                     int numeroPropiedad = Convert.ToInt32(vCargaAlojamiento.tbNroPropiedad.Text);
                     string tipoAlojamiento = vCargaAlojamiento.cbTipoAlojamiento.Text;
 
-                    miSistema.AgregarPropiedades(new Propiedad(direccion, numeroPropiedad, tipoAlojamiento));
+                    Propiedad unAlojamiento;
+                    if(tipoAlojamiento == "Casa Por Dia")
+                    {
+                        unAlojamiento = new CasaPorDia(direccion, numeroPropiedad, tipoAlojamiento);
+                    }
+                    else if (tipoAlojamiento == "Casa Fin de Semana")
+                    {
+                        unAlojamiento = new CasaFindeSemana(direccion, numeroPropiedad, tipoAlojamiento);
+                    }
+                    else
+                    {
+                        unAlojamiento = new Habitacion(direccion, numeroPropiedad, tipoAlojamiento);
+                    }
+
+                    miSistema.AgregarPropiedades(unAlojamiento);//new Propiedad(direccion, numeroPropiedad, tipoAlojamiento));
                     CargarDatos();
                     vCargaAlojamiento.Dispose();
                 }           
@@ -582,13 +604,6 @@ namespace TP_2_LAB___2
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                //string ruta = openFileDialog1.FileName;
-                //string[] lineas = File.ReadAllLines(ruta);
-                //foreach (string linea in lineas)
-                //{
-                //    string[] columnas = linea.Split(';');
-                //    dataGridView1.Rows.Add(columnas);
-                //}
                 string ruta = openFileDialog1.FileName;
                 try
                 {
@@ -599,7 +614,22 @@ namespace TP_2_LAB___2
                 {
                     MessageBox.Show(ex.Message);
                 }
-                
+            }
+        }
+
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string ruta = saveFileDialog1.FileName;
+                try
+                {
+                    miSistema.ExportarReservas(ruta);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
     }

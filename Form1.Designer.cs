@@ -381,6 +381,7 @@ namespace TP_2_LAB___2
             this.btnExportar.TabIndex = 8;
             this.btnExportar.Text = "Exportar";
             this.btnExportar.UseVisualStyleBackColor = true;
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // openFileDialog1
             // 

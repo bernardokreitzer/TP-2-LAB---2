@@ -49,7 +49,10 @@ namespace TP_2_LAB___2
         public Cliente NuevoCliente { get { return nuevoCliente; } }
 
 
-
+        public override string ToString()
+        {
+            return 1 + ";" + NuevoCliente.Nombre + ";" + NuevoCliente.Dni + ";" + Alojamiento.Direccion + ";" + CantidadDeDias + ";" + FechaCheckin.ToString("d") + ";" + FechaCheckOut.ToString("d") + ";" + PrecioFinal;
+        }
 
     }
 }

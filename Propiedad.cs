@@ -10,9 +10,10 @@ using System.IO;
 namespace TP_2_LAB___2
 {
     [Serializable]
-    class Propiedad
+    abstract class Propiedad
     {
         private string direccion;
+        private string localidad;
         private int numeroPropiedad;
         protected double precioBase;
         protected string tipoPropiedad;
@@ -26,6 +27,21 @@ namespace TP_2_LAB___2
             numeroPropiedad = numero;
             tipoPropiedad = propiedad;
             fotos = new List<string>();
+        }
+        public Propiedad(double precioBase, string direccion, int numeroPropiedad, string tipoPropiedad, string localidad)
+        {
+            this.precioBase = precioBase;
+            this.direccion = direccion;
+            this.numeroPropiedad = numeroPropiedad;
+            this.tipoPropiedad = tipoPropiedad;
+            this.localidad = localidad;
+            fotos = new List<string>();
+        }
+
+        public double PrecioBase
+        {
+            get { return precioBase; }
+            set { precioBase = value; }
         }
 
         public string Direccion
@@ -47,10 +63,16 @@ namespace TP_2_LAB___2
             set { tipoPropiedad = value; }
 
         }
+        public string Localidad
+        {
+            get { return localidad; }
+            set { localidad = value; }
+        }
 
         public void AgregarFoto(string unaFoto)
         {
             fotos.Add(unaFoto);
         }
+        public abstract double CalcularCosto(int dias);
     }
 }

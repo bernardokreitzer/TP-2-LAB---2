@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -117,7 +118,29 @@ namespace TP_2_LAB___2
                 if (sr != null) sr.Close();
                 if (archivo != null) archivo.Close();
             }
-            
+        }
+        public void ExportarReservas(string ruta)
+        {
+            FileStream archivo = null;
+            StreamWriter sw = null;
+            try
+            {
+                archivo = new FileStream(ruta, FileMode.Create, FileAccess.Write);
+                sw = new StreamWriter(archivo);
+                foreach (Reserva r in reservas)
+                {
+                    sw.WriteLine(r.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al exportar reservas: " + ex.Message);
+            }
+            finally
+            {
+                if (sw != null) sw.Close();
+                if (archivo != null) archivo.Close();
+            }
         }
     }
 }
